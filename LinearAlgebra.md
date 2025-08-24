@@ -302,11 +302,13 @@ The key idea for finding the solutions of $A\mathbf{x} = \mathbf{0}$ is to look 
 
 Consider the matrix:
 
-$$A = \begin{bmatrix}
+$$
+A = \begin{bmatrix}
 1 & 3 & 0 & 0 & 3 \\
 0 & 0 & 1 & 0 & 9 \\
 0 & 0 & 0 & 1 & -4
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 which is already in RREF.
 
@@ -314,32 +316,37 @@ which is already in RREF.
 
 Pivots appear at the first nonzero entry of each nonzero row:
 
-- Row 1 pivot → column 1
-- Row 2 pivot → column 3
-- Row 3 pivot → column 4
+-   Row 1 pivot → column 1
+-   Row 2 pivot → column 3
+-   Row 3 pivot → column 4
 
 Therefore:
-- **Pivot columns:** 1, 3, 4
-- **Non-pivot columns:** 2, 5
+
+-   **Pivot columns:** 1, 3, 4
+-   **Non-pivot columns:** 2, 5
 
 #### 2. Express Non-Pivot Columns as Linear Combinations of Pivot Columns
 
 Write the column vectors (columns of $A$) explicitly:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 p_1 &= \text{col}_1(A) = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, &
 p_2 &= \text{col}_2(A) = \begin{bmatrix} 3 \\ 0 \\ 0 \end{bmatrix}, \\
 p_3 &= \text{col}_3(A) = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, &
 p_4 &= \text{col}_4(A) = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}, \\
 p_5 &= \text{col}_5(A) = \begin{bmatrix} 3 \\ 9 \\ -4 \end{bmatrix}.
-\end{aligned}$$
+\end{aligned}
+$$
 
 Now express the non-pivot columns in terms of the pivots $p_1, p_3, p_4$:
 
 ##### Column 2:
+
 $$p_2 = \begin{bmatrix} 3 \\ 0 \\ 0 \end{bmatrix} = 3\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} = 3p_1$$
 
 ##### Column 5:
+
 $$p_5 = \begin{bmatrix} 3 \\ 9 \\ -4 \end{bmatrix} = 3\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + 9\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} - 4\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = 3p_1 + 9p_3 - 4p_4$$
 
 #### 3. Use This to Solve $A\mathbf{x} = \mathbf{0}$
@@ -358,11 +365,13 @@ $$(x_1 + 3x_2 + 3x_5)p_1 + (x_3 + 9x_5)p_3 + (x_4 - 4x_5)p_4 = \mathbf{0}$$
 
 Because $p_1, p_3, p_4$ are linearly independent (they are standard basis vectors in $\mathbb{R}^3$), each coefficient must be zero:
 
-$$\begin{cases}
+$$
+\begin{cases}
 x_1 + 3x_2 + 3x_5 = 0 \\
 x_3 + 9x_5 = 0 \\
 x_4 - 4x_5 = 0
-\end{cases}$$
+\end{cases}
+$$
 
 #### 4. Parameterize the Solution (Free Variables)
 
@@ -372,17 +381,20 @@ $$x_2 = s, \quad x_5 = t \quad (s, t \in \mathbb{R})$$
 
 Then from the three equations above:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 x_1 &= -3x_2 - 3x_5 = -3s - 3t \\
 x_3 &= -9x_5 = -9t \\
 x_4 &= 4x_5 = 4t
-\end{aligned}$$
+\end{aligned}
+$$
 
 So the general solution to $A\mathbf{x} = \mathbf{0}$ is:
 
 $$\mathbf{x} = \begin{pmatrix} -3s - 3t \\ s \\ -9t \\ 4t \\ t \end{pmatrix} = s\begin{pmatrix} -3 \\ 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} + t\begin{pmatrix} -3 \\ 0 \\ -9 \\ 4 \\ 1 \end{pmatrix}, \quad s, t \in \mathbb{R}$$
 
 ---
+
 ## The Null Space (Kernel) of a Matrix
 
 The **null space** of a matrix $A$, denoted $\ker(A)$ (short for "kernel of $A$"), is the set of all vectors $\mathbf{x}$ in the domain of $A$ such that:
@@ -401,11 +413,13 @@ The null space consists of all solutions to the homogeneous system of linear equ
 
 Consider the matrix:
 
-$$A = \begin{bmatrix}
+$$
+A = \begin{bmatrix}
 1 & 3 & 0 & 0 & 3 \\
 0 & 0 & 1 & 0 & 9 \\
 0 & 0 & 0 & 1 & -4
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 This is a $3 \times 5$ matrix, so $\mathbf{x} = [x_1, x_2, x_3, x_4, x_5]^T \in \mathbb{R}^5$, and the system $A\mathbf{x} = \mathbf{0}$ represents three equations with five unknowns. The null space $\ker(A)$ is the set of all vectors $\mathbf{x} \in \mathbb{R}^5$ that satisfy this system.
 
@@ -427,11 +441,13 @@ These two vectors form a **basis** for the null space, and the null space is **t
 
 The null space contains all solutions to the homogeneous system. In this case, it describes all vectors $\mathbf{x}$ that satisfy:
 
-$$\begin{cases}
+$$
+\begin{cases}
 x_1 + 3x_2 + 3x_5 = 0 \\
 x_3 + 9x_5 = 0 \\
 x_4 - 4x_5 = 0
-\end{cases}$$
+\end{cases}
+$$
 
 ### Geometrically
 
@@ -440,123 +456,162 @@ If we think of $A$ as a linear transformation from $\mathbb{R}^5 \to \mathbb{R}^
 ### Dimension of the Null Space
 
 The dimension of $\ker(A)$, called the **nullity**, equals the number of free variables (non-pivot columns). Here:
-- Total columns: 5
-- Pivot columns: 3
-- Non-pivot columns: $5 - 3 = 2$
-- Therefore, nullity = 2
+
+-   Total columns: 5
+-   Pivot columns: 3
+-   Non-pivot columns: $5 - 3 = 2$
+-   Therefore, nullity = 2
 
 ## Importance of the Null Space
 
 ### 1. Solutions to Homogeneous Systems
 
-- If $\ker(A) = \{ \mathbf{0} \}$: only the trivial solution exists
-- If $\ker(A)$ contains non-zero vectors: infinitely many solutions exist
+-   If $\ker(A) = \{ \mathbf{0} \}$: only the trivial solution exists
+-   If $\ker(A)$ contains non-zero vectors: infinitely many solutions exist
 
 ### 2. Linear Independence
 
-- If $\ker(A) = \{ \mathbf{0} \}$: columns of $A$ are linearly independent
-- If $\ker(A)$ is non-trivial: columns of $A$ are linearly dependent
+-   If $\ker(A) = \{ \mathbf{0} \}$: columns of $A$ are linearly independent
+-   If $\ker(A)$ is non-trivial: columns of $A$ are linearly dependent
 
 ### 3. Rank-Nullity Theorem
 
 $$\text{rank}(A) + \text{nullity}(A) = n$$
 
 For our example:
-- $\text{rank}(A) = 3$ (number of pivot columns)
-- $\text{nullity}(A) = 2$ (dimension of null space)
-- $n = 5$ (number of columns)
+
+-   $\text{rank}(A) = 3$ (number of pivot columns)
+-   $\text{nullity}(A) = 2$ (dimension of null space)
+-   $n = 5$ (number of columns)
 
 ---
+
 ### Mechanical Method for Constructing Null Space Basis from RREF : The Free‑Variable Identity‑Block Pattern
 
 This method leverages the structure of the RREF to systematically find the solutions to the homogeneous system $A\mathbf{x} = \mathbf{0}$.
 
-## What is Done Here?
-
-The process is a systematic algorithm to find a **basis for the null space** $\ker(A)$, which is the set of all vectors $\mathbf{x}$ such that $A\mathbf{x} = \mathbf{0}$. The method uses the RREF to identify:
-- **Pivot columns** (corresponding to dependent variables)
-- **Free columns** (corresponding to free variables)
-
-Then constructs basis vectors by assigning values to free variables and solving for pivot variables.
-
-## 1. Short Algorithm (Mechanical Recipe)
+## Short Algorithm (Mechanical Recipe)
 
 ### Step-by-Step Method
 
 1. **Identify pivot and free columns**
-   - Pivot columns: those with a leading 1 in each non-zero row of RREF
-   - Free columns: those without pivots (corresponding to free variables)
+
+    - Pivot columns: those with a leading 1 in each non-zero row of RREF
+    - Free columns: those without pivots (corresponding to free variables)
+    - Let $A \in \mathbb{R}^{m\times n}$ be in RREF with
+      pivot columns indexed by $I = (i_1,\dots,i_r)$,
+      free columns indexed by $J = (j_1,\dots,j_k)$, where $k = n - r$.
 
 2. **Construct basis vectors**
    For each free variable:
-   - Set that free variable to 1 and all other free variables to 0
-   - For each pivot variable, set its value to the negative of the coefficient of the free variable in that pivot row
-   - The resulting vector is a basis vector for the null space
+
+    - Set that free variable to 1 and all other free variables to 0
+    - For each pivot variable, set its value to the negative of the coefficient of the free variable in that pivot row
+    - The resulting vector is a basis vector for the null space
 
 3. **Form the basis matrix**
-   - Collect coefficients of free variables in pivot rows into matrix $C$
-   - Construct null space basis matrix $N = \begin{bmatrix} -C \\ I_k \end{bmatrix}$
+    - Collect coefficients of free variables in pivot rows into matrix $C$
+    - Construct null space basis matrix $N = \begin{bmatrix} -C \\ I_k \end{bmatrix}$
 
-## 2. Application to Example Matrix
+-   Each pivot row has the form
+    $$
+    x_{i_p} + \sum_{q=1}^k C_{p,q}\,x_{j_q} = 0,\qquad p=1,\dots,r,
+    $$
+    which defines the coefficient matrix $C \in \mathbb{R}^{r\times k}$ of the free variables in the pivot equations.    
+
+For an $m \times n$ matrix in RREF with $r$ pivot columns and $k = n - r$ free columns:
+
+### Setup
+
+-   Pivot indices: $i_1, i_2, \ldots, i_r$ (pivot variables)
+-   Free indices: $j_1, j_2, \ldots, j_k$ (free variables)
+
+### Construction
+
+1. Form the $r \times k$ matrix $C$:
+
+    - Entry $C_{p,q}$ = coefficient of $q$-th free variable (column $j_q$) in $p$-th pivot row
+
+2. Null space basis matrix:
+   $$N = \begin{bmatrix} -C \\ I_k \end{bmatrix}$$
+
+    where:
+
+    - Top $r$ rows: pivot variables $x_{i_1}, x_{i_2}, \ldots, x_{i_r}$ (negated coefficients from $C$)
+    - Bottom $k$ rows: free variables $x_{j_1}, x_{j_2}, \ldots, x_{j_k}$ (identity matrix $I_k$)
+    - Rows arranged to match original variable order $x_1, x_2, \ldots, x_n$
+
+Each column of $N$ is a basis vector for $\ker(A)$.
+
+---
 
 Consider the matrix:
 
-$$A = \begin{bmatrix}
+$$
+A = \begin{bmatrix}
 1 & 3 & 0 & 0 & 3 \\
 0 & 0 & 1 & 0 & 9 \\
 0 & 0 & 0 & 1 & -4
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 This is a $3 \times 5$ matrix in RREF. We seek all $\mathbf{x} = [x_1, x_2, x_3, x_4, x_5]^T$ such that $A\mathbf{x} = \mathbf{0}$.
 
-### Step 1: Identify Pivot and Free Columns
+##### Step 1: Identify Pivot and Free Columns
 
 **Pivot columns:**
-- Row 1, column 1 ($x_1$)
-- Row 2, column 3 ($x_3$)
-- Row 3, column 4 ($x_4$)
+
+-   Row 1, column 1 ($x_1$)
+-   Row 2, column 3 ($x_3$)
+-   Row 3, column 4 ($x_4$)
 
 Therefore, pivot columns are 1, 3, and 4, corresponding to variables $x_1, x_3, x_4$.
 
 **Free columns:** Columns 2 and 5 have no pivots, corresponding to free variables $x_2$ and $x_5$. There are $k = 2$ free variables.
 
-### Step 2: Read Coefficients of Free Variables
+##### Step 2: Read Coefficients of Free Variables
 
 The pivot rows give equations involving free variables $x_2$ and $x_5$:
 
-- Row 1: $x_1 + 3x_2 + 3x_5 = 0$ → Coefficients of $(x_2, x_5)$ are $(3, 3)$
-- Row 2: $x_3 + 9x_5 = 0$ → Coefficients of $(x_2, x_5)$ are $(0, 9)$
-- Row 3: $x_4 - 4x_5 = 0$ → Coefficients of $(x_2, x_5)$ are $(0, -4)$
+-   Row 1: $x_1 + 3x_2 + 3x_5 = 0$ → Coefficients of $(x_2, x_5)$ are $(3, 3)$
+-   Row 2: $x_3 + 9x_5 = 0$ → Coefficients of $(x_2, x_5)$ are $(0, 9)$
+-   Row 3: $x_4 - 4x_5 = 0$ → Coefficients of $(x_2, x_5)$ are $(0, -4)$
 
 Collect these into matrix $C$:
 
-$$C = \begin{bmatrix}
+$$
+C = \begin{bmatrix}
 3 & 3 \\
 0 & 9 \\
 0 & -4
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ### Step 3: Construct Null Space Basis Matrix $N$
 
 The null space basis matrix is:
 
-$$N = \begin{bmatrix} -C \\ I_2 \end{bmatrix} = \begin{bmatrix}
+$$
+N = \begin{bmatrix} -C \\ I_2 \end{bmatrix} = \begin{bmatrix}
 -3 & -3 \\
 0 & -9 \\
 0 & 4 \\
 1 & 0 \\
 0 & 1
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 Reordering rows to match variable order $(x_1, x_2, x_3, x_4, x_5)$:
 
-$$N = \begin{bmatrix}
+$$
+N = \begin{bmatrix}
 -3 & -3 \\
 1 & 0 \\
 0 & -9 \\
 0 & 4 \\
 0 & 1
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ### Result: Basis Vectors
 
@@ -565,48 +620,12 @@ The columns of $N$ are the basis vectors:
 $$v^{(1)} = \begin{bmatrix} -3 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}, \quad v^{(2)} = \begin{bmatrix} -3 \\ 0 \\ -9 \\ 4 \\ 1 \end{bmatrix}$$
 
 These correspond to:
-- For $x_2$: Set $x_2 = 1$, $x_5 = 0$, then $x_1 = -3$, $x_3 = 0$, $x_4 = 0$
-- For $x_5$: Set $x_2 = 0$, $x_5 = 1$, then $x_1 = -3$, $x_3 = -9$, $x_4 = 4$
+
+-   For $x_2$: Set $x_2 = 1$, $x_5 = 0$, then $x_1 = -3$, $x_3 = 0$, $x_4 = 0$
+-   For $x_5$: Set $x_2 = 0$, $x_5 = 1$, then $x_1 = -3$, $x_3 = -9$, $x_4 = 4$
 
 The null space is:
 
 $$\ker(A) = \text{span} \left\{ \begin{bmatrix} -3 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} -3 \\ 0 \\ -9 \\ 4 \\ 1 \end{bmatrix} \right\}$$
 
-## 3. General Formula
-
-For an $m \times n$ matrix in RREF with $r$ pivot columns and $k = n - r$ free columns:
-
-### Setup
-- Pivot indices: $i_1, i_2, \ldots, i_r$ (pivot variables)
-- Free indices: $j_1, j_2, \ldots, j_k$ (free variables)
-
-### Construction
-1. Form the $r \times k$ matrix $C$:
-   - Entry $C_{p,q}$ = coefficient of $q$-th free variable (column $j_q$) in $p$-th pivot row
-
-2. Null space basis matrix:
-   $$N = \begin{bmatrix} -C \\ I_k \end{bmatrix}$$
-
-   where:
-   - Top $r$ rows: pivot variables $x_{i_1}, x_{i_2}, \ldots, x_{i_r}$ (negated coefficients from $C$)
-   - Bottom $k$ rows: free variables $x_{j_1}, x_{j_2}, \ldots, x_{j_k}$ (identity matrix $I_k$)
-   - Rows arranged to match original variable order $x_1, x_2, \ldots, x_n$
-
-Each column of $N$ is a basis vector for $\ker(A)$.
-
-## Purpose and Advantages
-
-### Why Use This Method?
-
-1. **Mechanical**: No explicit back-substitution needed
-2. **Systematic**: Works for any matrix in RREF
-3. **Efficient**: Directly constructs basis vectors
-4. **Clear structure**: The pattern reveals the relationship between free and pivot variables
-
-### The "Free-Variable Identity-Block" Pattern
-
-- **Identity block** $I_k$: Reflects setting one free variable to 1, others to 0
-- **$-C$ block**: Ensures pivot variables satisfy $A\mathbf{x} = \mathbf{0}$
-- **Standard technique**: Generalizes to any RREF matrix
-
-This pattern makes the method a standard tool in linear algebra for finding null space bases efficiently and systematically.
+---
