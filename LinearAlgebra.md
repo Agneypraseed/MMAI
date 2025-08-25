@@ -717,4 +717,61 @@ Since multiplying a basis vector by $-1$ does not change the span, both methods 
 $$\text{span}(N) = \text{span}(\tilde{N}) = \ker(A)$$
 
 ---
+## Calculating the Inverse Using Gaussian Elimination
+
+To compute the inverse $A^{-1}$ of $A \in \mathbb{R}^{n \times n}$, we need to find a matrix $X$ that satisfies $AX = I_n$. Then, $X = A^{-1}$.
+
+We can write this as a set of simultaneous linear equations $AX = I_n$, where we solve for $X = [\mathbf{x}_1 | \cdots | \mathbf{x}_n]$.
+
+Using augmented matrix notation for a compact representation:
+
+$$[A | I_n] \leadsto \cdots \leadsto [I_n | A^{-1}] $$
+
+This means that if we bring the augmented equation system into reduced row-echelon form, we can read out the inverse on the right-hand side of the equation system.
+
+If the left block cannot be reduced to $I_n$ (i.e., a zero row appears), then $A$ is singular and $A^{-1}$ does not exist.
+
+**Key insight**: Determining the inverse of a matrix is equivalent to solving systems of linear equations.
+
+#### Example 
+
+To determine the inverse of:
+
+$$A = \begin{bmatrix}
+1 & 0 & 2 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 2 & 0 & 1 \\
+1 & 1 & 1 & 1
+\end{bmatrix} $$
+
+#### Step 1: Set up the augmented matrix
+
+$$\left[\begin{array}{cccc|cccc}
+1 & 0 & 2 & 0 & 1 & 0 & 0 & 0 \\
+1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+1 & 2 & 0 & 1 & 0 & 0 & 1 & 0 \\
+1 & 1 & 1 & 1 & 0 & 0 & 0 & 1
+\end{array}\right]$$
+
+#### Step 2: Apply Gaussian elimination to reach RREF
+
+$$\left[\begin{array}{cccc|cccc}
+1 & 0 & 0 & 0 & -1 & 2 & -2 & 2 \\
+0 & 1 & 0 & 0 & 1 & -1 & 2 & -2 \\
+0 & 0 & 1 & 0 & 1 & -1 & 1 & -1 \\
+0 & 0 & 0 & 1 & -1 & 0 & -1 & 2
+\end{array}\right]$$
+
+#### Step 3: Read the inverse from the right-hand side
+
+The desired inverse is given as:
+
+$$A^{-1} = \begin{bmatrix}
+-1 & 2 & -2 & 2 \\
+1 & -1 & 2 & -2 \\
+1 & -1 & 1 & -1 \\
+-1 & 0 & -1 & 2
+\end{bmatrix}$$
+
+---
 
