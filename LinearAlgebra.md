@@ -490,7 +490,7 @@ For our example:
 
 This method leverages the structure of the RREF to systematically find the solutions to the homogeneous system $A\mathbf{x} = \mathbf{0}$.
 
-## Short Algorithm (Mechanical Recipe)
+#### Short Algorithm (Mechanical Recipe)
 
 ### Step-by-Step Method
 
@@ -629,3 +629,69 @@ The null space is:
 $$\ker(A) = \text{span} \left\{ \begin{bmatrix} -3 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} -3 \\ 0 \\ -9 \\ 4 \\ 1 \end{bmatrix} \right\}$$
 
 ---
+### The Minus-1 Trick for Homogeneous Systems
+
+The Minus-1 Trick is a practical method for reading out solutions $\mathbf{x}$ of a homogeneous system of linear equations $A\mathbf{x} = \mathbf{0}$, where $A \in \mathbb{R}^{k \times n}$, $\mathbf{x} \in \mathbb{R}^n$.
+
+
+We assume that $A$ is in reduced row-echelon form without any rows that contain only zeros
+
+#### The Augmentation Process
+
+1. **Extend the matrix**: We extend this $k \times n$ matrix $A$ to an $n \times n$ matrix $\tilde{A}$ by adding $n - k$ rows
+
+2. **Form of added rows**: Each added row has the form:
+   $$[0 \cdots 0 \quad -1 \quad 0 \cdots 0] $$
+   where $-1$ is placed in a non-pivot column position
+
+3. **Result**: The diagonal of the augmented matrix $\tilde{A}$ contains either 1 or $-1$
+
+#### Key Result
+
+**The columns of $\tilde{A}$ that contain $-1$ as pivots are solutions of the homogeneous system $A\mathbf{x} = \mathbf{0}$.**
+
+## Example
+Given
+$$
+A=\begin{bmatrix}
+1 & 3 & 0 & 0 & 3\\
+0 & 0 & 1 & 0 & 9\\
+0 & 0 & 0 & 1 & -4
+\end{bmatrix}
+\quad (k=3,\ n=5),
+$$
+
+We now augment this matrix to a 5 × 5 matrix by adding rows of the form [ 0 · · · 0 −1 0 · · · 0 ] at the places where the pivots on the diagonal are missing and obtain
+
+
+$$
+\tilde A=
+\begin{bmatrix}
+1 & 3 & 0 & 0 & 3\\
+0 & -1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 9\\
+0 & 0 & 0 & 1 & -4\\
+0 & 0 & 0 & 0 & -1
+\end{bmatrix}.
+$$
+
+From the augmented matrix $\tilde{A}$, we can immediately read out the solutions of $A\mathbf{x} = \mathbf{0}$ by taking the columns of $\tilde{A}$ which contain $-1$ on the diagonal.
+
+For $\mathbf{x} \in \mathbb{R}^5$:
+
+$$\mathbf{x} = \lambda_1 \begin{bmatrix} 3 \\ -1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + \lambda_2 \begin{bmatrix} 3 \\ 0 \\ 9 \\ -4 \\ -1 \end{bmatrix}, \quad \lambda_1, \lambda_2 \in \mathbb{R}$$
+
+---
+## Relation to the Identity‑Block Pattern
+If $A$ (after permuting columns) is $[I_k\ C]$, the standard null‑space basis matrix is
+$$
+N=\begin{bmatrix}-C\\ I_{n-k}\end{bmatrix}.
+$$
+The Minus‑1 Trick produces the columns of
+$$
+\tilde N=\begin{bmatrix}C\\ -I_{n-k}\end{bmatrix},
+$$
+which differ from $N$ by an overall minus sign on each basis vector—immaterial for spanning $\ker(A)$.
+
+---
+
