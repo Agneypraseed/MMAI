@@ -682,16 +682,39 @@ For $\mathbf{x} \in \mathbb{R}^5$:
 $$\mathbf{x} = \lambda_1 \begin{bmatrix} 3 \\ -1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + \lambda_2 \begin{bmatrix} 3 \\ 0 \\ 9 \\ -4 \\ -1 \end{bmatrix}, \quad \lambda_1, \lambda_2 \in \mathbb{R}$$
 
 ---
-## Relation to the Identity‑Block Pattern
-If $A$ (after permuting columns) is $[I_k\ C]$, the standard null‑space basis matrix is
-$$
-N=\begin{bmatrix}-C\\ I_{n-k}\end{bmatrix}.
-$$
-The Minus‑1 Trick produces the columns of
-$$
-\tilde N=\begin{bmatrix}C\\ -I_{n-k}\end{bmatrix},
-$$
-which differ from $N$ by an overall minus sign on each basis vector—immaterial for spanning $\ker(A)$.
+### Comparison: Standard Method vs. Minus-1 Trick
+
+`Standard "Identity Block" Form`
+
+If (after permuting columns so pivots come first) we have:
+
+$$A = [I_k \; C]$$
+
+then the system $A\mathbf{x} = \mathbf{0}$ becomes:
+
+$$I_k \mathbf{x}_p + C\mathbf{x}_f = \mathbf{0} \quad \implies \quad \mathbf{x}_p = -C\mathbf{x}_f$$
+
+where:
+- $\mathbf{x}_p \in \mathbb{R}^k$ are the pivot variables
+- $\mathbf{x}_f \in \mathbb{R}^{n-k}$ are the free variables
+
+Thus the null space basis is packaged in the matrix:
+
+$$N = \begin{bmatrix} -C \\ I_{n-k} \end{bmatrix}$$
+
+`Minus-1 Trick Form`
+
+When you extend $A$ to the augmented $\tilde{A}$ with "$-1$ pivots" for free variables, the free-variable columns in $\tilde{A}$ look like:
+
+$$\begin{bmatrix} C \\ -I_{n-k} \end{bmatrix}$$
+
+So the Minus-1 trick produces:
+
+$$\tilde{N} = \begin{bmatrix} C \\ -I_{n-k} \end{bmatrix}$$
+
+Since multiplying a basis vector by $-1$ does not change the span, both methods describe exactly the same null space $\ker(A)$:
+
+$$\text{span}(N) = \text{span}(\tilde{N}) = \ker(A)$$
 
 ---
 
