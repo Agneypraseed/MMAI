@@ -856,33 +856,6 @@ Thus $A_R^{-1}$ “undoes” multiplication by $A$ from the right.
 
 ### (c) Moore-Penrose Pseudoinverse
 
-The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
-
-- Always exists, for any $A \in \mathbb{R}^{m \times n}$
-- Reduces to the usual inverse if $A$ is square and invertible
-- Gives the "best" least-squares solution to $A\mathbf{x} = \mathbf{b}$
-- Solves least‑squares problems: $x^\star = A^+ b$ is the minimum‑norm solution to $\min_x \|Ax-b\|_2$.
-
-**Formula** (when $A$ has full column rank):
-- Full column rank ($m\ge n$): 
-  $$
-  A^+ = (A^\top A)^{-1} A^\top \quad (\text{equals } A_L^{-1}).
-  $$
-
-**Formula** (when $A$ has full row rank):
-- Full row rank ($m\le n$):
-  $$
-  A^+ = A^\top (A A^\top)^{-1} \quad (\text{equals } A_R^{-1}).
-  $$
-
-The pseudoinverse is particularly important in data science, statistics, and machine learning for **least squares regression**.
-
-## Summary
-
-- Tall (overdetermined), full column rank: least‑squares solution $x=(A^\top A)^{-1}A^\top b = A^+ b$.
-- Wide (underdetermined), full row rank: minimum‑norm solution $x=A^\top(AA^\top)^{-1} b = A^+ b$.
-- Rank‑deficient: $A^+$ still exists (via SVD) and gives least‑squares/minimum‑norm solutions.
----
 ### Least Squares Method (overdetermined case)
 
 Often in applications (statistics, machine learning, data fitting), $A$ is **tall** ($m > n$), meaning we have **more equations than unknowns**. In that case, the system is usually **inconsistent** — there is no exact $\mathbf{x}$ such that $A\mathbf{x} = \mathbf{b}$.
@@ -936,7 +909,7 @@ $$
 
 - This is called the least-squares solution because it minimizes the squared error between Ax and 𝑏
 - $A\mathbf{x}$ is the **projection of $\mathbf{b}$** onto the column space of $A$
-- If the system were consistent (i.e., $\mathbf{b}$ is already in $\text{Col}(A)$), the least-squares solution coincides with the exact solution
+
 ---
 
 ### Minimum-norm solution (underdetermined case)
@@ -962,13 +935,7 @@ This is called the minimum-norm solution because it picks the shortest vector am
 ---
 ### Rank-deficient case
 
-For a matrix 
-
-$$
-A \in \mathbb{R}^{m \times n},
-$$
-
-the **rank** of (A) is defined as the maximum number of linearly independent columns (or rows) of (A).
+For a matrix $A \in \mathbb{R}^{m \times n}$ the **rank** of (A) is defined as the maximum number of linearly independent columns (or rows) of (A).
 
 If  ${rank}(A) < \min(m, n)$ we say that \(A\) is **rank-deficient**.
 
@@ -976,3 +943,31 @@ Intuitively, this means that some columns (or rows) are linearly dependent on ot
 
 - Some directions in the solution space are “free,” leading to **infinitely many solutions** in the underdetermined case.
 - Even in overdetermined least-squares problems, the minimizer may **not be unique**, because one can move along **null-space directions** without changing (Ax).
+
+The **pseudoinverse** $A^+$ defined via the singular value decomposition (SVD), always exists and provides:
+
+- **Overdetermined case:** Multiple least-squares minimizers exist. The pseudoinverse $(A^+)$ selects the one with **minimum norm**.  
+- **Underdetermined case:** Infinitely many solutions exist. The pseudoinverse $(A^+)$ selects the **minimum-norm solution**.
+
+---
+
+The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
+
+- Always exists, for any $A \in \mathbb{R}^{m \times n}$
+- Reduces to the usual inverse if $A$ is square and invertible
+
+**Formula** (when $A$ has full column rank):
+- Full column rank ($m\ge n$): 
+  $$
+  A^+ = (A^\top A)^{-1} A^\top \quad (\text{equals } A_L^{-1}).
+  $$
+
+**Formula** (when $A$ has full row rank):
+- Full row rank ($m\le n$):
+  $$
+  A^+ = A^\top (A A^\top)^{-1} \quad (\text{equals } A_R^{-1}).
+  $$
+
+The pseudoinverse is particularly important in data science, statistics, and machine learning for **least squares regression**.
+
+---
