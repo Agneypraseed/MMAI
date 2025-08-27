@@ -954,6 +954,7 @@ The **pseudoinverse** $A^+$ defined via the singular value decomposition (SVD), 
 The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
 
 - Always exists, for any $A \in \mathbb{R}^{m \times n}$
+- No matter what shape or rank A has $𝐴^+$ is defined.
 - Reduces to the usual inverse if $A$ is square and invertible
 
 **Formula** (when $A$ has full column rank):
@@ -970,4 +971,46 @@ The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
 
 The pseudoinverse is particularly important in data science, statistics, and machine learning for **least squares regression**.
 
+### How is it Computed?
+
+The most robust way is via the **Singular Value Decomposition (SVD)**:
+
+$$A = U\Sigma V^{\top}$$
+
+where $U, V$ are orthogonal and $\Sigma$ is diagonal with nonnegative entries (the singular values).
+
+Then:
+
+$$A^+ = V\Sigma^+ U^{\top}$$
+
+where $\Sigma^+$ is obtained by inverting each nonzero singular value and transposing the shape of $\Sigma$.
+
+This construction guarantees:
+- Always exists
+- Stable and numerically reliable
+- Encodes rank and null space information cleanly
+
+   
+``The pseudoinverse`` $A^+$ ``is a matrix you can always use in place of an inverse.``
+
 ---
+
+Geometric view:
+$$
+Ax^\star = AA^+ b = \operatorname{proj}_{\operatorname{Col}(A)}(b),\qquad
+b - Ax^\star \perp \operatorname{Col}(A).
+$$
+
+Define the projectors
+$$
+P_{\operatorname{col}} := AA^+,\qquad P_{\operatorname{row}} := A^+A.
+$$
+Then $P_{\operatorname{col}}$ projects onto $\operatorname{Col}(A)$ and $P_{\operatorname{row}}$ projects onto $\operatorname{Row}(A)$, both orthogonally:
+$$
+P_{\operatorname{col}}^2=P_{\operatorname{col}}=(P_{\operatorname{col}})^\top,\quad
+P_{\operatorname{row}}^2=P_{\operatorname{row}}=(P_{\operatorname{row}})^\top.
+$$
+For $x^\star=A^+b$, the residual $r^\star=b-Ax^\star$ satisfies $A^\top r^\star=0$.
+
+---
+
