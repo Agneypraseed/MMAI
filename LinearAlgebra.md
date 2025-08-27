@@ -774,4 +774,205 @@ $$A^{-1} = \begin{bmatrix}
 \end{bmatrix}$$
 
 ---
+## Matrix Inverse and Solving Linear Systems
 
+For a matrix $A$, the inverse $A^{-1}$ is defined so that:
+
+$$AA^{-1} = A^{-1}A = I_n$$
+
+where $I_n$ is the identity matrix of size $n \times n$.
+
+**$A$ must be square ($n \times n$)**, because only then do the dimensions match on both sides for both multiplications.
+
+**If $A$ is square ($n \times n$) and invertible** (i.e., $\det(A) \neq 0$), then:
+
+$$A\mathbf{x} = \mathbf{b} \quad \implies \quad \mathbf{x} = A^{-1}\mathbf{b}$$
+
+This is the clean formula solution for solving linear systems.
+
+#### Non-Invertible Square Matrices
+
+If $A$ is **not invertible** (determinant = 0, or rows/columns are linearly dependent), then $A^{-1}$ does not exist. In that case:
+
+- The system may have **no solution** (inconsistent system), or
+- The system may have **infinitely many solutions** (dependent system)
+
+#### Non-Square Matrices
+
+If $A$ is **not square** ($m \times n$ with $m \neq n$),  Then the usual inverse does not make sense, because $I_m \neq I_n$.
+
+### Generalized Inverses
+
+For non-square or singular matrices, mathematicians define *generalized inverses*.
+
+### (a) Left Inverse
+
+If $A$ is **tall** ($m \geq n$) and has **full column rank** (rank = $n$), then:
+
+$$A^{\top}A \in \mathbb{R}^{n \times n}$$
+
+is invertible. We define the **left inverse**:
+
+$$A_L^{-1} = (A^{\top}A)^{-1}A^{\top}$$
+
+which satisfies:
+
+$$A_L^{-1}A = I_n$$
+
+So it behaves like an inverse **on the left**.
+
+#### Why This Formula?
+
+**Requirement**: A left inverse $B$ of $A$ must satisfy $BA = I_n$.
+
+**Construction**:
+1. $A^{\top}A$ is always an $n \times n$ symmetric matrix
+2. If $A$ has full column rank, then $A^{\top}A$ is invertible
+3. Let's verify: $BA = (A^{\top}A)^{-1}A^{\top}A = (A^{\top}A)^{-1}(A^{\top}A) = I_n$ ✓
+
+**Intuition**:
+- The factor $A^{\top}$ projects things back into the column space of $A$
+- Multiplying by $(A^{\top}A)^{-1}$ rescales it correctly so the final effect is identity on $\mathbb{R}^n$
+- This construction comes directly from the **normal equations** in least squares:
+  $$A^{\top}A\mathbf{x} = A^{\top}\mathbf{b}$$
+  which are solved by:
+  $$\mathbf{x} = (A^{\top}A)^{-1}A^{\top}\mathbf{b}$$
+
+### (b) Right Inverse
+
+If $A$ is **wide** ($m \leq n$) and has **full row rank** (rank = $m$), then:
+
+$$AA^{\top} \in \mathbb{R}^{m \times m}$$
+
+is invertible. We define the **right inverse**:
+
+$$A_R^{-1} = A^{\top}(AA^{\top})^{-1}$$
+
+- Check:
+  $$
+  A A_R^{-1} \;=\; A A^\top (A A^\top)^{-1} \;=\; I_m.
+  $$
+Thus $A_R^{-1}$ “undoes” multiplication by $A$ from the right.
+
+### (c) Moore-Penrose Pseudoinverse
+
+The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
+
+- Always exists, for any $A \in \mathbb{R}^{m \times n}$
+- Reduces to the usual inverse if $A$ is square and invertible
+- Gives the "best" least-squares solution to $A\mathbf{x} = \mathbf{b}$
+- Solves least‑squares problems: $x^\star = A^+ b$ is the minimum‑norm solution to $\min_x \|Ax-b\|_2$.
+
+**Formula** (when $A$ has full column rank):
+- Full column rank ($m\ge n$): 
+  $$
+  A^+ = (A^\top A)^{-1} A^\top \quad (\text{equals } A_L^{-1}).
+  $$
+
+**Formula** (when $A$ has full row rank):
+- Full row rank ($m\le n$):
+  $$
+  A^+ = A^\top (A A^\top)^{-1} \quad (\text{equals } A_R^{-1}).
+  $$
+
+The pseudoinverse is particularly important in data science, statistics, and machine learning for **least squares regression**.
+
+## Summary
+
+- Tall (overdetermined), full column rank: least‑squares solution $x=(A^\top A)^{-1}A^\top b = A^+ b$.
+- Wide (underdetermined), full row rank: minimum‑norm solution $x=A^\top(AA^\top)^{-1} b = A^+ b$.
+- Rank‑deficient: $A^+$ still exists (via SVD) and gives least‑squares/minimum‑norm solutions.
+---
+### Least Squares Method (overdetermined case)
+
+Often in applications (statistics, machine learning, data fitting), $A$ is **tall** ($m > n$), meaning we have **more equations than unknowns**. In that case, the system is usually **inconsistent** — there is no exact $\mathbf{x}$ such that $A\mathbf{x} = \mathbf{b}$.
+
+Since we cannot solve $A\mathbf{x} = \mathbf{b}$ exactly, we instead look for an $\mathbf{x}$ that makes $A\mathbf{x}$ **as close as possible** to $\mathbf{b}$. 
+
+We cannot satisfy all equations, but we can find a vector $x $ that makes the residual 
+
+$$
+r = b - Ax
+$$
+
+as small as possible in the Euclidean norm.
+
+So we solve:
+
+$$
+x^\star = \arg \min_x \|Ax - b\|_2.
+$$
+
+
+Formally:
+
+$$\min_{\mathbf{x} \in \mathbb{R}^n} \|A\mathbf{x} - \mathbf{b}\|^2$$
+
+This is the **least squares problem**: we want the $\mathbf{x}$ that minimizes the squared error between $A\mathbf{x}$ and $\mathbf{b}$.
+
+#### Derivation (normal equations) : 
+
+The error is:
+
+$$f(\mathbf{x}) = \|A\mathbf{x} - \mathbf{b}\|^2 = (A\mathbf{x} - \mathbf{b})^{\top}(A\mathbf{x} - \mathbf{b})$$
+
+Then
+$$
+\nabla f(x) = 2A^\top(Ax-b).
+$$
+Setting $\nabla f(x)=0$ gives the **normal equations**
+$$
+A^\top A\,x = A^\top b.
+$$
+
+
+### Solution
+
+- If $A$ has full column rank ($\operatorname{rank}(A)=n$), then $A^\top A$ is invertible and the unique minimizer is
+  $$
+  x^\star = (A^\top A)^{-1}A^\top b.
+  $$
+  Equivalently, $x^\star = A^+ b$ (pseudoinverse).
+
+- This is called the least-squares solution because it minimizes the squared error between Ax and 𝑏
+- $A\mathbf{x}$ is the **projection of $\mathbf{b}$** onto the column space of $A$
+- If the system were consistent (i.e., $\mathbf{b}$ is already in $\text{Col}(A)$), the least-squares solution coincides with the exact solution
+---
+
+### Minimum-norm solution (underdetermined case)
+
+Underdetermined (wide) system: too many possible solutions, so we pick the one that is shortest in length. That’s the minimum-norm solution.
+
+Among all possible solutions, we select the one with the smallest Euclidean norm:
+
+$$
+x^\star = \arg \min_{x : Ax = b} \|x\|_2.
+$$
+
+If \(A\) has full row rank, the solution can be expressed as:
+
+$$
+x^\star = A^\top (A A^\top)^{-1} b = A^+ b,
+$$
+
+where $(A^+)$ denotes the **Moore-Penrose pseudoinverse** of \(A\).
+
+This is called the minimum-norm solution because it picks the shortest vector among the infinitely many possible solutions.
+
+---
+### Rank-deficient case
+
+For a matrix 
+
+$$
+A \in \mathbb{R}^{m \times n},
+$$
+
+the **rank** of (A) is defined as the maximum number of linearly independent columns (or rows) of (A).
+
+If  ${rank}(A) < \min(m, n)$ we say that \(A\) is **rank-deficient**.
+
+Intuitively, this means that some columns (or rows) are linearly dependent on others. Consequently:
+
+- Some directions in the solution space are “free,” leading to **infinitely many solutions** in the underdetermined case.
+- Even in overdetermined least-squares problems, the minimizer may **not be unique**, because one can move along **null-space directions** without changing (Ax).
