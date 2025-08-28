@@ -949,6 +949,17 @@ The **pseudoinverse** $A^+$ defined via the singular value decomposition (SVD), 
 - **Overdetermined case:** Multiple least-squares minimizers exist. The pseudoinverse $(A^+)$ selects the one with **minimum norm**.  
 - **Underdetermined case:** Infinitely many solutions exist. The pseudoinverse $(A^+)$ selects the **minimum-norm solution**.
 
+In this case, the **Moore–Penrose pseudoinverse** $A^+$ picks out one special solution:
+
+$$
+x^\star = A^+ b,
+$$
+
+namely the one with **minimum Euclidean norm** among all least-squares solutions.
+This is called the **minimum-norm least-squares solution**, because it not only minimizes $\|Ax - b\|_2$
+but also selects the solution with the **smallest Euclidean norm** among all possible least-squares solutions.
+
+
 ---
 
 The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
@@ -970,6 +981,11 @@ The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
   $$
 
 The pseudoinverse is particularly important in data science, statistics, and machine learning for **least squares regression**.
+
+For reasons of numerical precision it is generally not recommended to compute the inverse or pseudo-inverse.
+Forming $A^\top A$ requires a **matrix–matrix multiplication**, which is computationally expensive for large $A$.
+Furthermore, computing the inverse $(A^\top A)^{-1} $ adds additional cost.
+
 
 ### How is it Computed?
 
@@ -1013,4 +1029,82 @@ $$
 For $x^\star=A^+b$, the residual $r^\star=b-Ax^\star$ satisfies $A^\top r^\star=0$.
 
 ---
+Gaussian elimination is not only for solving $Ax = b$. The same algorithm underpins many core operations in linear algebra:
+
+- **Determinants:** You can compute $\det(A)$ by reducing $A$ to triangular form and multiplying the pivots.  
+- **Independence:** By row reducing a set of vectors, you can check if they are linearly independent.  
+- **Inverses:** By augmenting with $I$ and performing row reduction, one obtains $A^{-1}$.  
+- **Rank:** The number of pivots (nonzero rows in echelon form) gives $\text{rank}(A)$.  
+- **Bases:** From the reduced row echelon form (RREF), one can extract bases for the column space, row space, or null space.  
+
+---
+Gaussian elimination has a computational cost of about:
+
+$$O(n^3)$$
+
+operations for an $n \times n$ system.
+
+* In the **first column**, you eliminate entries below the pivot. That means you update about $(n-1)$ rows, and each update touches about $(n-1)$ entries of that row.  
+  → Roughly $(n-1)\cdot (n-1) \approx n^2$ operations.
+
+* In the **second column**, the active submatrix is now of size $(n-1) \times (n-1)$. Work there is about $(n-2)^2$.
+
+* Next, $(n-3)^2$, and so on, until the last few pivots are trivial.
+
+The total cost is:
+
+$$
+n^2 + (n-1)^2 + (n-2)^2 + \dots + 1^2.
+$$
+
+And recall (or prove) the identity:
+
+$$
+1^2 + 2^2 + \dots + n^2 = \frac{n(n+1)(2n+1)}{6}.
+$$
+
+Thus, the total operation count is on the order of:
+
+$$
+\frac{1}{3}n^3.
+$$
+
+- For **millions of variables**: $O(n^3)$ becomes astronomically expensive in both time and memory
+
+---
+
+### Iterative Methods
+
+Instead, we turn to **iterative methods**, which don't try to solve the whole system at once, but **refine an approximation step by step**.
+
+#### General Idea
+
+$$\mathbf{x}^{(k+1)} = C\mathbf{x}^{(k)} + \mathbf{d}$$
+
+where $C$ and $\mathbf{d}$ are chosen so that the approximation converges to the true solution $\mathbf{x}^*$.
+
+- At each step, the residual:
+  $$\mathbf{r}^{(k)} = \mathbf{b} - A\mathbf{x}^{(k)}$$
+  gets smaller
+
+- The error norm $\|\mathbf{x}^{(k)} - \mathbf{x}^*\|$ shrinks with iterations
+
+### Examples of Iterative Methods
+
+- **Jacobi method**
+- **Gauss-Seidel method**
+- **Successive over-relaxation (SOR)**
+- **Conjugate gradient (CG)** and other **Krylov subspace methods**
+
+These methods scale much better for large, sparse systems because:
+
+- They don't require full elimination
+- They exploit sparsity (lots of zeros in $A$)
+- Often, convergence is reached in far fewer than $O(n^3)$ steps
+
+      **Gaussian elimination** = exact, finite, but costly → good for moderate-size problems
+
+      **Iterative methods** = approximate but scalable → essential for large systems in science/engineering (e.g., fluid dynamics, machine learning)
+---
+
 
