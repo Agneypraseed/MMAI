@@ -83,4 +83,22 @@ $$\mathbf{a} \times (\mathbf{b} \times \mathbf{c}) = (\mathbf{a} \cdot \mathbf{c
 This formula is commonly remembered as the "BAC-CAB rule" based on the arrangement of vectors in the final expression.
 
 ---
+#### Area of Parallelogram Spanned by $\mathbf{a}$ and $\mathbf{b}$
 
+$$\text{Area} = \|\mathbf{a} \times \mathbf{b}\| $$
+
+#### Volume of Parallelepiped Spanned by $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$
+
+$$\text{Volume} = |\mathbf{a} \cdot (\mathbf{b} \times \mathbf{c})|$$
+
+This is the **absolute value** of the **scalar triple product**.
+
+### Equivalent Determinant Form
+
+$$\text{Volume} = \left|\det\begin{bmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{bmatrix}\right|$$
+
+where the columns (or rows) are the vectors.
+
+- The scalar triple product is cyclic: $\mathbf{a} \cdot (\mathbf{b} \times \mathbf{c}) = \mathbf{b} \cdot (\mathbf{c} \times \mathbf{a}) = \mathbf{c} \cdot (\mathbf{a} \times \mathbf{b})$
+
+---
