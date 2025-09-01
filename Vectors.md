@@ -190,3 +190,132 @@ $$= (\|\mathbf{a}\|\|\mathbf{b}\|\sin\theta)^2 = \text{(area)}^2$$
   $$
 
 ---
+
+### General Line
+
+Any line in 2D can be written as:
+
+$$Ax + By + C = 0$$
+
+### Normal Vector
+
+The **normal vector** is simply:
+
+$$\mathbf{n} = \langle A, B \rangle$$
+
+because the coefficients $A, B$ are exactly the components perpendicular to the line.
+
+Take any two distinct points on the line, $P_1=(x_1,y_1)$ and $P_2=(x_2,y_2)$, so
+$$
+Ax_1 + By_1 + C = 0, \qquad Ax_2 + By_2 + C = 0.
+$$
+The vector along the line from $P_1$ to $P_2$ is
+$$
+\mathbf{v} = \langle x_2 - x_1,\ y_2 - y_1\rangle.
+$$
+Compute the dot product with $\mathbf{n}=\langle A,B\rangle$:
+$$
+\mathbf{n}\cdot\mathbf{v} = A(x_2-x_1) + B(y_2-y_1).
+$$
+Subtracting the two line equations gives
+$$
+\big(Ax_2 + By_2 + C\big) - \big(Ax_1 + By_1 + C\big) = 0
+\;\;\Longrightarrow\;\;
+A(x_2-x_1) + B(y_2-y_1) = 0.
+$$
+Thus $\mathbf{n}\cdot\mathbf{v}=0$ for every direction vector $\mathbf{v}$ along the line, so $\mathbf{n}$ is perpendicular to the line.
+
+#### The Gradient Explanation
+
+This connects to a profound principle:
+
+$$\nabla f = \langle A, B \rangle \text{ is } \perp \text{ to level curves of } f(x,y) = Ax + By + C$$
+
+**Broader principle**: This generalizes beautifully to:
+- 3D: The normal to plane $Ax + By + Cz + D = 0$ is $\langle A, B, C \rangle$
+- n-D: The normal to hyperplane $\sum a_i x_i + c = 0$ is $\langle a_1, a_2, \ldots, a_n \rangle$
+
+### Direction Vector
+
+A **direction vector** is any vector perpendicular to $\mathbf{n}$. One easy choice:
+
+$$\mathbf{d} = \langle -B, A \rangle$$
+
+### Slope of a Line
+For a line in slope–intercept form
+$$
+y = m x + c,
+$$
+the slope is $m = \tan\theta$, where $\theta$ is the angle the line makes with the $x$-axis.
+
+Rewrite as:
+$$-mx + y - c = 0$$
+
+So $A = m$, $B = -1$.
+
+- **Normal**: $\mathbf{n} = $ $\langle -m, 1 \rangle$
+- **Direction**: $\mathbf{d} = \langle 1, m \rangle$ 
+
+#### Angle Between Two Lines
+For lines with slopes $m_1$ and $m_2$, the angle $\phi$ between them satisfies
+$$
+\tan \phi = \left|\frac{m_1 - m_2}{1 + m_1 m_2}\right|.
+$$
+If the lines are perpendicular, then $\phi = 90^\circ$, so $\tan \phi$ is undefined. This occurs exactly when the denominator is zero:
+$$
+1 + m_1 m_2 = 0 \quad \Longrightarrow \quad m_1 m_2 = -1.
+$$
+
+- Vertical line $x = a$ has undefined slope; a perpendicular line is horizontal $y = b$ (slope $0$).
+
+---
+### Planes 
+
+The general form of a plane in 3D is:
+
+$$Ax + By + Cz + D = 0$$
+
+- Distance from point $(x_0, y_0, z_0)$ to plane:
+  $$d = \frac{|Ax_0 + By_0 + Cz_0 + D|}{\sqrt{A^2 + B^2 + C^2}}$$
+
+The vector
+
+$$\mathbf{n} = \langle A, B, C \rangle$$
+
+is **perpendicular to the plane**.
+
+A **direction vector** is any vector **lying in the plane**.
+
+Direction vectors lie in the plane and are therefore orthogonal to the normal:
+$$
+\mathbf{u}\cdot\mathbf{n}=0,\quad \mathbf{v}\cdot\mathbf{n}=0.
+$$
+Equivalently, solve the homogeneous equation
+$$
+Ax + By + Cz = 0
+$$
+to obtain two independent solutions; these give two independent direction vectors $\mathbf{u},\mathbf{v}$.
+
+#### Point–normal and parametric forms
+- Point–normal form (given a point $P_0=(x_0,y_0,z_0)$ on the plane):
+  $$
+  \mathbf{n}\cdot\big(\langle x,y,z\rangle - \langle x_0,y_0,z_0\rangle\big)=0.
+  $$
+- Parametric form (using two independent direction vectors $\mathbf{u},\mathbf{v}$):
+  $$
+  \mathbf{r}(s,t)=\mathbf{p}_0 + s\,\mathbf{u} + t\,\mathbf{v},\qquad s,t\in\mathbb{R},
+  $$
+  where $\mathbf{p}_0$ is any point on the plane.
+
+- Projection of a point onto the plane
+
+  With signed distance $d=\dfrac{Ax_0+By_0+Cz_0+D}{\sqrt{A^2+B^2+C^2}}$ and unit normal $\hat{\mathbf{n}}$,
+  $$
+  \mathrm{proj}_{\text{plane}}(x_0,y_0,z_0)
+  = \langle x_0,y_0,z_0\rangle - d\,\hat{\mathbf{n}}.  
+  $$
+
+---
+
+
+
