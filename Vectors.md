@@ -316,6 +316,53 @@ to obtain two independent solutions; these give two independent direction vector
   $$
 
 ---
+### Parametric Form Method for Line as Intersection of Two Planes
+
+A line in 3D can be described **parametrically**:
+
+$$\mathbf{r}(t) = \mathbf{P} + t\mathbf{d}$$
+
+where:
+- $\mathbf{P}$ is a point on the line
+- $\mathbf{d}$ is a direction vector
+- $t$ is a parameter
+
+#### Example: 
+
+Given the system:
+
+$$\begin{cases}
+2x + 3y - 4z = -1 \\
+x - 2y + z = 3
+\end{cases}$$
+
+Pick one variable to be free. Common trick: let $z = t$.
+
+Substituting $z = t$ into the equations:
+
+$$2x + 3y - 4t = -1$$
+$$x - 2y + t = 3$$
+
+$$x = \frac{5}{7}t + 1, \quad y = \frac{6}{7}t - 1, \quad z = t$$
+
+Write in Vector (Parametric) Form
+
+$$\mathbf{r}(t) = (1, -1, 0) + t\left(\frac{5}{7}, \frac{6}{7}, 1\right)$$
+
+$$\mathbf{r}(t) = (1, -1, 0) + s(5, 6, 7)$$
+
+- **Point**: $(1, -1, 0)$ is obtained by setting $t = 0$
+- **Direction vector**: $(5, 6, 7)$ comes from the coefficients of $t$
+- Any point on the line = base point + scalar multiple of direction vector
+
+#### Alternative: Direction Vector by Cross Product
+
+The direction vector can also be found directly:
+$$\mathbf{d} = \mathbf{n}_1 \times \mathbf{n}_2$$
+
+where $\mathbf{n}_1 = \langle 2, 3, -4 \rangle$ and $\mathbf{n}_2 = \langle 1, -2, 1 \rangle$ are the normal vectors to the two planes.
+
+---
 ### Skew Lines
 
 Two or more lines are **coplanar** if there exists a **single plane** that contains all of them.
@@ -336,26 +383,31 @@ For lines defined as intersections of planes:
 - $D_2$: intersection of planes $\Pi_3$ and $\Pi_4$
 
 Direction vectors can be found by:
-- $\mathbf{v}_1 = \mathbf{n}_1 \times \mathbf{n}_2$ (cross product of normal vectors to $\Pi_1$ and $\Pi_2$)
-- $\mathbf{v}_2 = \mathbf{n}_3 \times \mathbf{n}_4$ (cross product of normal vectors to $\Pi_3$ and $\Pi_4$)
+- $\mathbf{d}_1 = \mathbf{n}_1 \times \mathbf{n}_2$ (cross product of normal vectors to $\Pi_1$ and $\Pi_2$)
+- $\mathbf{d}_2 = \mathbf{n}_3 \times \mathbf{n}_4$ (cross product of normal vectors to $\Pi_3$ and $\Pi_4$)
 
 1. **Find a point on each line**
    - $P_1$ on line $D_1$
    - $P_2$ on line $D_2$
 
 2. **Get direction vectors**
-   - $\mathbf{v}_1$ for line $D_1$
-   - $\mathbf{v}_2$ for line $D_2$
+   - $\mathbf{d}_1$ for line $D_1$
+   - $\mathbf{d}_2$ for line $D_2$
 
 3. **Form connecting vector**
    - $\mathbf{w} = \overrightarrow{P_1P_2}$ (vector from $P_1$ to $P_2$)
 
 4. **Apply scalar triple product test**
-   - Compute: $\mathbf{w} \cdot (\mathbf{v}_1 \times \mathbf{v}_2)$
+   - Compute: $\mathbf{w} \cdot (\mathbf{d}_1 \times \mathbf{d}_2)$
    
-$$\mathbf{w} \cdot (\mathbf{v}_1 \times \mathbf{v}_2) = \begin{cases}
+$$\mathbf{w} \cdot (\mathbf{d}_1 \times \mathbf{d}_2) = \begin{cases}
 0 & \text{Lines are coplanar} \\
 \neq 0 & \text{Lines are skew}
 \end{cases}$$
 
+If lines are skew , the shortest distance is
+$$
+\mathrm{dist}(D_1,D_2)
+=\frac{|\,\mathbf{w}\cdot(\mathbf{d}_1\times\mathbf{d}_2)\,|}{\|\mathbf{d}_1\times\mathbf{d}_2\|}.
+$$
 ---
