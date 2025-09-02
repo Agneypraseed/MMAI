@@ -316,6 +316,46 @@ to obtain two independent solutions; these give two independent direction vector
   $$
 
 ---
+### Skew Lines
 
+Two or more lines are **coplanar** if there exists a **single plane** that contains all of them.
 
+Skew lines : non-coplanar
 
+1. **Intersecting lines**: Always coplanar (the intersection point and direction vectors define a unique plane)
+2. **Parallel lines**: Always coplanar (they define a unique plane containing both)
+3. **Skew lines**: NOT coplanar (neither parallel nor intersecting)
+
+Three vectors are coplanar if their scalar triple product is zero. 
+
+#### Example 
+Given two lines $D_1$ and $D_2$ in 3D (each defined by intersection of two planes):
+
+For lines defined as intersections of planes:
+- $D_1$: intersection of planes $\Pi_1$ and $\Pi_2$
+- $D_2$: intersection of planes $\Pi_3$ and $\Pi_4$
+
+Direction vectors can be found by:
+- $\mathbf{v}_1 = \mathbf{n}_1 \times \mathbf{n}_2$ (cross product of normal vectors to $\Pi_1$ and $\Pi_2$)
+- $\mathbf{v}_2 = \mathbf{n}_3 \times \mathbf{n}_4$ (cross product of normal vectors to $\Pi_3$ and $\Pi_4$)
+
+1. **Find a point on each line**
+   - $P_1$ on line $D_1$
+   - $P_2$ on line $D_2$
+
+2. **Get direction vectors**
+   - $\mathbf{v}_1$ for line $D_1$
+   - $\mathbf{v}_2$ for line $D_2$
+
+3. **Form connecting vector**
+   - $\mathbf{w} = \overrightarrow{P_1P_2}$ (vector from $P_1$ to $P_2$)
+
+4. **Apply scalar triple product test**
+   - Compute: $\mathbf{w} \cdot (\mathbf{v}_1 \times \mathbf{v}_2)$
+   
+$$\mathbf{w} \cdot (\mathbf{v}_1 \times \mathbf{v}_2) = \begin{cases}
+0 & \text{Lines are coplanar} \\
+\neq 0 & \text{Lines are skew}
+\end{cases}$$
+
+---
