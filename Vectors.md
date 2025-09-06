@@ -316,7 +316,7 @@ to obtain two independent solutions; these give two independent direction vector
   $$
 
 ---
-### Parametric Form Method for Line as Intersection of Two Planes
+### Parametric Form Method for Line as Intersection of Two Planes (Point–direction form)
 
 A line in 3D can be described **parametrically**:
 
@@ -405,9 +405,179 @@ $$\mathbf{w} \cdot (\mathbf{d}_1 \times \mathbf{d}_2) = \begin{cases}
 \neq 0 & \text{Lines are skew}
 \end{cases}$$
 
-If lines are skew , the shortest distance is
-$$
-\mathrm{dist}(D_1,D_2)
-=\frac{|\,\mathbf{w}\cdot(\mathbf{d}_1\times\mathbf{d}_2)\,|}{\|\mathbf{d}_1\times\mathbf{d}_2\|}.
-$$
 ---
+### Distance Between Two Lines in 3D
+
+Suppose we have two lines:
+
+$$L_1: \quad \mathbf{r}_1(t) = \mathbf{P}_1 + t\mathbf{d}_1$$
+$$L_2: \quad \mathbf{r}_2(s) = \mathbf{P}_2 + s\mathbf{d}_2$$
+
+where:
+- $\mathbf{P}_1, \mathbf{P}_2$ are points on the lines
+- $\mathbf{d}_1, \mathbf{d}_2$ are direction vectors
+
+### Case 1: Intersecting Lines
+Distance = $0$
+
+### Case 2: Parallel Lines
+When $\mathbf{d}_1 \parallel \mathbf{d}_2$ (i.e., $\mathbf{d}_1 \times \mathbf{d}_2 = \mathbf{0}$):
+
+$$\text{dist}(L_1, L_2) = \frac{\|(\mathbf{P}_2 - \mathbf{P}_1) \times \mathbf{d}_1\|}{\|\mathbf{d}_1\|}$$
+
+### Case 3: Skew Lines
+When lines are neither parallel nor intersecting
+
+The shortest distance between two skew lines is the length of the segment that is **perpendicular to both lines**.
+
+$$\text{dist}(L_1, L_2) = \frac{|(\mathbf{P}_2 - \mathbf{P}_1) \cdot (\mathbf{d}_1 \times \mathbf{d}_2)|}{\|\mathbf{d}_1 \times \mathbf{d}_2\|}$$
+
+1. **$\mathbf{d}_1 \times \mathbf{d}_2$** is a vector perpendicular to both lines
+
+2. **Scalar triple product** $(\mathbf{P}_2 - \mathbf{P}_1) \cdot (\mathbf{d}_1 \times \mathbf{d}_2)$ measures the volume of the parallelepiped spanned by:
+   - $\mathbf{P}_2 - \mathbf{P}_1$ (vector between points)
+   - $\mathbf{d}_1$ (direction of line 1)
+   - $\mathbf{d}_2$ (direction of line 2)
+
+3. **Distance = Volume / Base Area**:
+   - Volume = $|(\mathbf{P}_2 - \mathbf{P}_1) \cdot (\mathbf{d}_1 \times \mathbf{d}_2)|$
+   - Base Area = $\|\mathbf{d}_1 \times \mathbf{d}_2\|$
+   - Height (distance) = Volume / Base Area
+
+#### Geometric Interpretation
+A vector perpendicular to both $\mathbf{d}_1$ and $\mathbf{d}_2$ is:
+
+$$\mathbf{n} = \mathbf{d}_1 \times \mathbf{d}_2$$
+
+Take the unit normal:
+
+$$\hat{\mathbf{n}} = \frac{\mathbf{n}}{\|\mathbf{n}\|} = \frac{\mathbf{d}_1 \times \mathbf{d}_2}{\|\mathbf{d}_1 \times \mathbf{d}_2\|}$$
+
+The connector vector between the lines is:
+
+$$\mathbf{v} = \mathbf{P}_2 - \mathbf{P}_1$$
+
+Project $\mathbf{v}$ onto $\hat{\mathbf{n}}$. The absolute value of this projection is the perpendicular distance:
+
+$$\boxed{\text{dist}(L_1, L_2) = |\mathbf{v} \cdot \hat{\mathbf{n}}| = \frac{|(\mathbf{P}_2 - \mathbf{P}_1) \cdot (\mathbf{d}_1 \times \mathbf{d}_2)|}{\|\mathbf{d}_1 \times \mathbf{d}_2\|}}$$
+
+---
+## Basis of a Vector Space
+
+A **basis** of a vector space (say $\mathbb{R}^n$) is a set of vectors that satisfies **two conditions**:
+
+1. **Linearly independent** — no vector in the set can be written as a linear combination of the others
+2. **Spanning** — every vector in the space can be written as a linear combination of those basis vectors
+
+A basis is a minimal, nonredundant set of vectors that can build every vector in the space uniquely. It provides coordinates, encodes the dimension.
+
+
+The standard basis in $\mathbb{R}^2$ is:
+
+$$\mathbf{e}_1 = (1, 0), \quad \mathbf{e}_2 = (0, 1)$$
+
+- It aligns with the **usual x- and y-axes** in the plane
+- When we write a vector $(x,y)$ in $\mathbb{R}^2$, we really mean:
+
+  $$\boxed{(x,y) = x(1,0) + y(0,1)}$$
+
+- By default, all coordinates are taken **relative to $B_0$** unless stated otherwise
+
+
+Any vector $(a, b)$ can be written as:
+
+$$(a, b) = a\mathbf{e}_1 + b\mathbf{e}_2$$
+
+So $\{\mathbf{e}_1, \mathbf{e}_2\}$ is a basis of $\mathbb{R}^2$.
+
+
+Non-uniqueness of bases: for instance,
+  $$
+  b_1=(1,-1),\quad b_2=(-2,1)
+  $$
+  also form a basis because the $2\times2$ matrix $B=[\,b_1\ b_2\,]$ has nonzero determinant:
+  $$
+  \det B=\begin{vmatrix}1&-2\\-1&1\end{vmatrix}=1\cdot1-(-1)\cdot(-2)=1-2=-1\ne 0.
+  $$
+
+A basis doesn't have to be the standard one. For example:
+
+$$B_1 = \{ (2,1), (-2,3) \}$$
+
+This is still a valid basis of $\mathbb{R}^2$, but now the "axes" of your coordinate system are tilted and stretched.  
+
+``A basis provides the “axes” of your coordinate system. Coordinates change with the basis, but the geometric vector does not.``
+
+The number of vectors in a basis = the **dimension** of the space.
+
+Given vectors $v_1,\dots,v_n\in\mathbb{R}^n$ and $V=[\,v_1\ \cdots\ v_n\,]$:
+- Determinant test (square case): $\det(V)\ne 0 \ \Longleftrightarrow\ \{v_i\}$ is a basis.
+- Rank test: $\operatorname{rank}(V)=n \ \Longleftrightarrow\ \{v_i\}$ is a basis.
+- RREF test: If the RREF of $V$ is $I_n$, then $\{v_i\}$ is a basis.
+
+Suppose you have a vector $\mathbf{v} \in \mathbb{R}^2$.
+
+In the Standard Basis $B_0$
+
+If $\mathbf{v} = (5,7)$, this means:
+
+$$\mathbf{v} = 5(1,0) + 7(0,1)$$
+
+In Another Basis $B_1 = \{b_1, b_2\}$
+
+The same vector $\mathbf{v}$ can also be written as:
+
+$$\mathbf{v} = \alpha b_1 + \beta b_2$$
+
+where $(\alpha, \beta)$ are the **coordinates of $\mathbf{v}$ in basis $B_1$**.
+
+- A vector's coordinates **depend on the basis chosen** — it may look different in $B_0$ and $B_1$, but it's the same vector in $\mathbb{R}^2$
+
+### Change of Basis Matrix
+
+- In the standard basis $B_0 = \{(1,0), (0,1)\}$, the vector $\mathbf{v} = (2,5)$ means $2 \cdot (1,0) + 5 \cdot (0,1)$
+- In another basis, say $B_1 = \{(2,1), (-2,3)\}$, the same $\mathbf{v}$ has different coordinates : $(2,1)$
+
+"changing basis" means: expressing the *same vector* in the language of a different basis.
+
+Suppose $B = \{b_1, b_2\}$ is a basis of $\mathbb{R}^2$.
+
+Form the **basis matrix**:
+
+$$P_B = \begin{bmatrix} b_1 & b_2 \end{bmatrix}$$
+
+### Key Relationships
+
+- If $[\mathbf{v}]_B$ are the coordinates of $\mathbf{v}$ in basis $B$, then the actual vector in standard coordinates is:
+
+  $$\boxed{\mathbf{v} = P_B [\mathbf{v}]_B}$$
+
+- Conversely, to recover the coordinates in basis $B$:
+
+  $$\boxed{[\mathbf{v}]_B = P_B^{-1} \mathbf{v}}$$
+
+#### From One Basis to Another
+
+Suppose we want to go **from coordinates in $B_1$ to coordinates in $B_2$**.
+
+#### Derivation
+
+We have:
+$$[\mathbf{v}]_{B_2} = P_{B_2}^{-1} \mathbf{v}$$
+
+and since $\mathbf{v} = P_{B_1}[\mathbf{v}]_{B_1}$:
+
+$$[\mathbf{v}]_{B_2} = P_{B_2}^{-1} P_{B_1} [\mathbf{v}]_{B_1}$$
+
+- The matrix
+  $$
+  M_{B_1\to B_2} \;=\; P_{B_2}^{-1}\,P_{B_1}
+  $$
+
+is the **change-of-basis matrix from $B_1$ to $B_2$**.
+
+So once you compute $M$, you can convert any coordinates in $B_1$ directly into coordinates in $B_2$.
+
+---
+
+
