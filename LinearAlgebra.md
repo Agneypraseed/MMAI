@@ -1,3 +1,92 @@
+
+---
+## Laplace (Cofactor) Expansion for Determinants
+
+For an $n \times n$ matrix $A = [a_{ij}]$, the Laplace expansion along row $i$ is:
+
+$$\det(A) = \sum_{j=1}^n (-1)^{i+j} a_{ij} \det(M_{ij})$$
+
+where:
+- $M_{ij}$ is the $(n-1) \times (n-1)$ **minor** obtained by deleting row $i$ and column $j$
+- $C_{ij} = (-1)^{i+j}\det(M_{ij})$ is called the **cofactor**
+
+You can expand along any row or any column — pick one with zeros to simplify.
+
+## Step-by-Step Example
+
+Let's compute the determinant of:
+
+$$A = \begin{bmatrix}
+2 & 0 & 3 \\
+1 & 4 & 5 \\
+0 & 2 & 1
+\end{bmatrix}$$
+
+Row 3 has a zero in position (3,1), so let's expand along row 3 to minimize calculations.
+
+#### Expansion Along Row 3
+
+$$\det(A) = \sum_{j=1}^3 (-1)^{3+j} a_{3j} \det(M_{3j})$$
+
+Breaking this down:
+- $j=1$: $(-1)^{3+1} \cdot 0 \cdot \det(M_{31}) = 0$
+- $j=2$: $(-1)^{3+2} \cdot 2 \cdot \det(M_{32})$
+- $j=3$: $(-1)^{3+3} \cdot 1 \cdot \det(M_{33})$
+
+#### Computing the Minors
+
+**For $M_{32}$** (delete row 3, column 2):
+
+$$M_{32} = \begin{bmatrix}
+2 & 3 \\
+1 & 5
+\end{bmatrix}$$
+
+$$\det(M_{32}) = 2(5) - 3(1) = 10 - 3 = 7$$
+
+**For $M_{33}$** (delete row 3, column 3):
+
+$$M_{33} = \begin{bmatrix}
+2 & 0 \\
+1 & 4
+\end{bmatrix}$$
+
+$$\det(M_{33}) = 2(4) - 0(1) = 8$$
+
+### Final Calculation
+
+$$\det(A) = (-1)^{3+2} \cdot 2 \cdot 7 + (-1)^{3+3} \cdot 1 \cdot 8$$
+$$= (-1)^5 \cdot 2 \cdot 7 + (-1)^6 \cdot 1 \cdot 8$$
+$$= -14 + 8$$
+$$= -6$$
+
+#### Alternative: Expansion Along Column 2
+
+Since column 2 has a zero at position (1,2), we could also expand along column 2:
+
+$$\det(A) = \sum_{i=1}^3 (-1)^{i+2} a_{i2} \det(M_{i2})$$
+
+Only non-zero terms:
+- $i=2$: $(-1)^{2+2} \cdot 4 \cdot \det(M_{22}) = 4 \cdot 2 = 8$
+- $i=3$: $(-1)^{3+2} \cdot 2 \cdot \det(M_{32}) = -2 \cdot 7 = -14$
+
+Result: $8 + (-14) = -6$ 
+
+#### Key Points
+
+1. **Choice matters**: Pick rows/columns with the most zeros
+2. **Sign pattern**: $(-1)^{i+j}$ creates a checkerboard pattern:
+   $$\begin{bmatrix}
+   + & - & + & \cdots \\
+   - & + & - & \cdots \\
+   + & - & + & \cdots \\
+   \vdots & \vdots & \vdots & \ddots
+   \end{bmatrix}$$
+
+
+
+
+---
 # Inverse of a 2×2 Matrix
 
 Given the matrix
