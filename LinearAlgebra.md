@@ -1,3 +1,114 @@
+## Determinants
+
+The determinant is a scalar value that encodes both the **volume** and **orientation** of the geometric object (parallelepiped) formed by the rows or columns of a matrix.
+
+#### Determinant in Two Dimensions (Area)
+
+Suppose we have two vectors in $\mathbb{R}^2$:
+
+$$\mathbf{a} = (a_1, a_2), \quad \mathbf{b} = (b_1, b_2)$$
+
+If we put these as rows (or columns) of a $2 \times 2$ matrix:
+
+$$A = \begin{bmatrix} a_1 & a_2 \\ b_1 & b_2 \end{bmatrix}$$
+
+then the determinant is:
+
+$$\det(A) = a_1 b_2 - a_2 b_1$$
+
+### Geometric Interpretation
+
+- The parallelogram spanned by $\mathbf{a}$ and $\mathbf{b}$ has **area** $|\det(A)|$
+- The **sign** of $\det(A)$ indicates orientation:
+  - **Positive**: if $\mathbf{a}$ rotated counterclockwise to $\mathbf{b}$
+  - **Negative**: if clockwise
+
+So in 2D, the determinant is the **signed area** of the parallelogram formed by the two vectors.
+
+#### Determinant in Three Dimensions (Volume)
+
+Consider three vectors in $\mathbb{R}^3$:
+
+$$\mathbf{a}, \mathbf{b}, \mathbf{c}$$
+
+If we arrange them as rows of a $3 \times 3$ matrix $A$, then:
+
+$$\det(A) = \mathbf{a} \cdot (\mathbf{b} \times \mathbf{c})$$
+
+
+- $|\det(A)|$ gives the **volume** of the parallelepiped formed by $\mathbf{a}, \mathbf{b}, \mathbf{c}$
+
+
+#### General Case in $\mathbb{R}^n$
+
+For an $n \times n$ matrix:
+
+- $|\det(A)|$ gives the $n$-dimensional volume (hypervolume) of the parallelepiped spanned by the rows (or columns)
+- The sign encodes orientation relative to the standard basis
+
+For any square matrix $A$:
+$$\boxed{\text{Signed Volume} = \det(A)}$$
+
+---
+### Row Operations and Determinants
+
+### 1. Row Swap
+**Swapping two rows** multiplies the determinant by $-1$.
+
+$$R_i \leftrightarrow R_j \implies \det(A') = -\det(A)$$
+
+### 2. Row Addition
+**Adding a multiple of one row to another** does not change the determinant.
+
+$$R_i \leftarrow R_i + kR_j \implies \det(A') = \det(A)$$
+
+### 3. Row Scaling
+**Multiplying a row by a non-zero scalar $k$** multiplies the determinant by $k$.
+
+$$R_i \leftarrow kR_i \implies \det(A') = k\cdot\det(A)$$
+
+#### Example
+Let's compute the determinant of:
+
+$$A = \begin{bmatrix}
+2 & 1 & 3 \\
+4 & 0 & 1 \\
+1 & 2 & 2
+\end{bmatrix}$$
+
+$$\det(A) = \det\begin{bmatrix}
+2 & 1 & 3 \\
+4 & 0 & 1 \\
+1 & 2 & 2
+\end{bmatrix}$$
+
+#### Row Operations to Create Upper Triangular Form
+
+**Operation 1**: $R_2 \leftarrow R_2 - 2R_1$ (no change to determinant)
+$$= \det\begin{bmatrix}
+2 & 1 & 3 \\
+0 & -2 & -5 \\
+1 & 2 & 2
+\end{bmatrix}$$
+
+**Operation 2**: $R_3 \leftarrow R_3 - \frac{1}{2}R_1$ (no change to determinant)
+$$= \det\begin{bmatrix}
+2 & 1 & 3 \\
+0 & -2 & -5 \\
+0 & \frac{3}{2} & \frac{1}{2}
+\end{bmatrix}$$
+
+**Operation 3**: $R_3 \leftarrow R_3 + \frac{3}{4}R_2$ (no change to determinant)
+$$= \det\begin{bmatrix}
+2 & 1 & 3 \\
+0 & -2 & -5 \\
+0 & 0 & -\frac{13}{4}
+\end{bmatrix}$$
+
+
+For an upper triangular matrix, the determinant is the product of diagonal elements:
+
+$$\det(A) = 2 \cdot (-2) \cdot \left(-\frac{13}{4}\right) = \frac{52}{4} = 13$$
 
 ---
 ## Laplace (Cofactor) Expansion for Determinants
@@ -82,7 +193,23 @@ Result: $8 + (-14) = -6$
    + & - & + & \cdots \\
    \vdots & \vdots & \vdots & \ddots
    \end{bmatrix}$$
+---
+### Property of Determinants
+1. **Transpose**: $\det(A^T) = \det(A)$
 
+2. **Inverse**: $\det(A^{-1}) = \frac{1}{\det(A)}$ (when $A$ is invertible)
+
+3. **Scalar multiplication**: $\det(kA) = k^n \det(A)$ for $n \times n$ matrix
+
+4. **Identity**: $\det(I) = 1$
+
+5. **Triangular matrices**: Determinant equals product of diagonal entries
+
+6. **Product rule**: $\det(AB) = \det(A) \cdot \det(B)$
+
+
+- **Matrix multiplication** itself is NOT commutative. In general, $AB \neq BA$.
+- The **determinant** of a matrix is a single number (a scalar). Scalar multiplication IS commutative.
 
 
 
