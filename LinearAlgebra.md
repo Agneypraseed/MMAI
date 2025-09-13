@@ -18,10 +18,10 @@ $$\det(A) = a_1 b_2 - a_2 b_1$$
 
 ### Geometric Interpretation
 
-- The parallelogram spanned by $\mathbf{a}$ and $\mathbf{b}$ has **area** $|\det(A)|$
-- The **sign** of $\det(A)$ indicates orientation:
-  - **Positive**: if $\mathbf{a}$ rotated counterclockwise to $\mathbf{b}$
-  - **Negative**: if clockwise
+-   The parallelogram spanned by $\mathbf{a}$ and $\mathbf{b}$ has **area** $|\det(A)|$
+-   The **sign** of $\det(A)$ indicates orientation:
+    -   **Positive**: if $\mathbf{a}$ rotated counterclockwise to $\mathbf{b}$
+    -   **Negative**: if clockwise
 
 So in 2D, the determinant is the **signed area** of the parallelogram formed by the two vectors.
 
@@ -35,82 +35,107 @@ If we arrange them as rows of a $3 \times 3$ matrix $A$, then:
 
 $$\det(A) = \mathbf{a} \cdot (\mathbf{b} \times \mathbf{c})$$
 
-
-- $|\det(A)|$ gives the **volume** of the parallelepiped formed by $\mathbf{a}, \mathbf{b}, \mathbf{c}$
-
+-   $|\det(A)|$ gives the **volume** of the parallelepiped formed by $\mathbf{a}, \mathbf{b}, \mathbf{c}$
 
 #### General Case in $\mathbb{R}^n$
 
 For an $n \times n$ matrix:
 
-- $|\det(A)|$ gives the $n$-dimensional volume (hypervolume) of the parallelepiped spanned by the rows (or columns)
-- The sign encodes orientation relative to the standard basis
+-   $|\det(A)|$ gives the $n$-dimensional volume (hypervolume) of the parallelepiped spanned by the rows (or columns)
+-   The sign encodes orientation relative to the standard basis
 
 For any square matrix $A$:
 $$\boxed{\text{Signed Volume} = \det(A)}$$
 
 ---
+
 ### Row Operations and Determinants
 
 ### 1. Row Swap
+
 **Swapping two rows** multiplies the determinant by $-1$.
 
 $$R_i \leftrightarrow R_j \implies \det(A') = -\det(A)$$
 
 ### 2. Row Addition
+
 **Adding a multiple of one row to another** does not change the determinant.
 
 $$R_i \leftarrow R_i + kR_j \implies \det(A') = \det(A)$$
 
 ### 3. Row Scaling
+
 **Multiplying a row by a non-zero scalar $k$** multiplies the determinant by $k$.
 
 $$R_i \leftarrow kR_i \implies \det(A') = k\cdot\det(A)$$
 
 #### Example
+
 Let's compute the determinant of:
 
-$$A = \begin{bmatrix}
+$$
+A = \begin{bmatrix}
 2 & 1 & 3 \\
 4 & 0 & 1 \\
 1 & 2 & 2
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
-$$\det(A) = \det\begin{bmatrix}
+$$
+\det(A) = \det\begin{bmatrix}
 2 & 1 & 3 \\
 4 & 0 & 1 \\
 1 & 2 & 2
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 #### Row Operations to Create Upper Triangular Form
 
 **Operation 1**: $R_2 \leftarrow R_2 - 2R_1$ (no change to determinant)
-$$= \det\begin{bmatrix}
+
+$$
+= \det\begin{bmatrix}
 2 & 1 & 3 \\
 0 & -2 & -5 \\
 1 & 2 & 2
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 **Operation 2**: $R_3 \leftarrow R_3 - \frac{1}{2}R_1$ (no change to determinant)
-$$= \det\begin{bmatrix}
+
+$$
+= \det\begin{bmatrix}
 2 & 1 & 3 \\
 0 & -2 & -5 \\
 0 & \frac{3}{2} & \frac{1}{2}
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 **Operation 3**: $R_3 \leftarrow R_3 + \frac{3}{4}R_2$ (no change to determinant)
-$$= \det\begin{bmatrix}
+
+$$
+= \det\begin{bmatrix}
 2 & 1 & 3 \\
 0 & -2 & -5 \\
 0 & 0 & -\frac{13}{4}
-\end{bmatrix}$$
-
+\end{bmatrix}
+$$
 
 For an upper triangular matrix, the determinant is the product of diagonal elements:
 
 $$\det(A) = 2 \cdot (-2) \cdot \left(-\frac{13}{4}\right) = \frac{52}{4} = 13$$
 
 ---
+
+### Elementary Matrices
+
+An **elementary matrix** is a square matrix obtained from the identity matrix by performing exactly one elementary row operation. Pre-multiplying any matrix by an elementary matrix applies that same row operation to the matrix as a whole.
+
+-   If $E$ is elementary and $D$ is any $m\times n$ matrix, then $E\,D$ is $D$ with one row operation applied.
+-   Right-multiplication by an elementary matrix applies the corresponding column operation: $D\,E$.
+
+---
+
 ## Laplace (Cofactor) Expansion for Determinants
 
 For an $n \times n$ matrix $A = [a_{ij}]$, the Laplace expansion along row $i$ is:
@@ -118,8 +143,9 @@ For an $n \times n$ matrix $A = [a_{ij}]$, the Laplace expansion along row $i$ i
 $$\det(A) = \sum_{j=1}^n (-1)^{i+j} a_{ij} \det(M_{ij})$$
 
 where:
-- $M_{ij}$ is the $(n-1) \times (n-1)$ **minor** obtained by deleting row $i$ and column $j$
-- $C_{ij} = (-1)^{i+j}\det(M_{ij})$ is called the **cofactor**
+
+-   $M_{ij}$ is the $(n-1) \times (n-1)$ **minor** obtained by deleting row $i$ and column $j$
+-   $C_{ij} = (-1)^{i+j}\det(M_{ij})$ is called the **cofactor**
 
 You can expand along any row or any column — pick one with zeros to simplify.
 
@@ -127,11 +153,13 @@ You can expand along any row or any column — pick one with zeros to simplify.
 
 Let's compute the determinant of:
 
-$$A = \begin{bmatrix}
+$$
+A = \begin{bmatrix}
 2 & 0 & 3 \\
 1 & 4 & 5 \\
 0 & 2 & 1
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 Row 3 has a zero in position (3,1), so let's expand along row 3 to minimize calculations.
 
@@ -140,27 +168,32 @@ Row 3 has a zero in position (3,1), so let's expand along row 3 to minimize calc
 $$\det(A) = \sum_{j=1}^3 (-1)^{3+j} a_{3j} \det(M_{3j})$$
 
 Breaking this down:
-- $j=1$: $(-1)^{3+1} \cdot 0 \cdot \det(M_{31}) = 0$
-- $j=2$: $(-1)^{3+2} \cdot 2 \cdot \det(M_{32})$
-- $j=3$: $(-1)^{3+3} \cdot 1 \cdot \det(M_{33})$
+
+-   $j=1$: $(-1)^{3+1} \cdot 0 \cdot \det(M_{31}) = 0$
+-   $j=2$: $(-1)^{3+2} \cdot 2 \cdot \det(M_{32})$
+-   $j=3$: $(-1)^{3+3} \cdot 1 \cdot \det(M_{33})$
 
 #### Computing the Minors
 
 **For $M_{32}$** (delete row 3, column 2):
 
-$$M_{32} = \begin{bmatrix}
+$$
+M_{32} = \begin{bmatrix}
 2 & 3 \\
 1 & 5
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 $$\det(M_{32}) = 2(5) - 3(1) = 10 - 3 = 7$$
 
 **For $M_{33}$** (delete row 3, column 3):
 
-$$M_{33} = \begin{bmatrix}
+$$
+M_{33} = \begin{bmatrix}
 2 & 0 \\
 1 & 4
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 $$\det(M_{33}) = 2(4) - 0(1) = 8$$
 
@@ -178,23 +211,29 @@ Since column 2 has a zero at position (1,2), we could also expand along column 2
 $$\det(A) = \sum_{i=1}^3 (-1)^{i+2} a_{i2} \det(M_{i2})$$
 
 Only non-zero terms:
-- $i=2$: $(-1)^{2+2} \cdot 4 \cdot \det(M_{22}) = 4 \cdot 2 = 8$
-- $i=3$: $(-1)^{3+2} \cdot 2 \cdot \det(M_{32}) = -2 \cdot 7 = -14$
 
-Result: $8 + (-14) = -6$ 
+-   $i=2$: $(-1)^{2+2} \cdot 4 \cdot \det(M_{22}) = 4 \cdot 2 = 8$
+-   $i=3$: $(-1)^{3+2} \cdot 2 \cdot \det(M_{32}) = -2 \cdot 7 = -14$
+
+Result: $8 + (-14) = -6$
 
 #### Key Points
 
 1. **Choice matters**: Pick rows/columns with the most zeros
 2. **Sign pattern**: $(-1)^{i+j}$ creates a checkerboard pattern:
-   $$\begin{bmatrix}
-   + & - & + & \cdots \\
-   - & + & - & \cdots \\
-   + & - & + & \cdots \\
-   \vdots & \vdots & \vdots & \ddots
-   \end{bmatrix}$$
+    $$
+    \begin{bmatrix}
+    + & - & + & \cdots \\
+    - & + & - & \cdots \\
+    + & - & + & \cdots \\
+    \vdots & \vdots & \vdots & \ddots
+    \end{bmatrix}
+    $$
+
 ---
+
 ### Property of Determinants
+
 1. **Transpose**: $\det(A^T) = \det(A)$
 
 2. **Inverse**: $\det(A^{-1}) = \frac{1}{\det(A)}$ (when $A$ is invertible)
@@ -205,16 +244,97 @@ Result: $8 + (-14) = -6$
 
 5. **Triangular matrices**: Determinant equals product of diagonal entries
 
+$$
+  \det(A) = \prod_{i=1}^n a_{ii}.
+$$
+
 6. **Product rule**: $\det(AB) = \det(A) \cdot \det(B)$
 
-
-- **Matrix multiplication** itself is NOT commutative. In general, $AB \neq BA$.
-- The **determinant** of a matrix is a single number (a scalar). Scalar multiplication IS commutative.
-
-
+    - **Matrix multiplication** itself is NOT commutative. In general, $AB \neq BA$.
+    - The **determinant** of a matrix is a single number (a scalar). Scalar multiplication IS commutative.
 
 ---
-# Inverse of a 2×2 Matrix
+
+### The Gauß Algorithm (Gaussian Elimination)
+
+The **Gauß algorithm** (Gaussian elimination) is a systematic method for solving systems of linear equations by transforming the coefficient matrix into **upper triangular form** using elementary row operations.
+
+An upper triangular matrix has all zeros below the main diagonal:
+
+$$
+\begin{bmatrix}
+* & * & * & * \\
+0 & * & * & * \\
+0 & 0 & * & * \\
+0 & 0 & 0 & *
+\end{bmatrix}
+$$
+
+where $*$ represents any value (including zero).
+
+1. **Choose pivot**: Select the leftmost non-zero entry in the first row
+2. **Eliminate below**: Use row operations to create zeros below the pivot
+3. **Move to next row/column**: Repeat for subsequent rows
+4. **Continue** until upper triangular form is achieved
+
+#### Example
+
+Transform this matrix to upper triangular form:
+
+$$
+A = \begin{bmatrix}
+2 & 1 & -1 \\
+-3 & -1 & 2 \\
+-2 & 1 & 2
+\end{bmatrix}
+$$
+
+#### Step 1: First column
+
+Eliminate below pivot (2):
+
+$R_2 \leftarrow R_2 + \frac{3}{2}R_1$:
+
+$$
+\begin{bmatrix}
+2 & 1 & -1 \\
+0 & \frac{1}{2} & \frac{1}{2} \\
+-2 & 1 & 2
+\end{bmatrix}
+$$
+
+$R_3 \leftarrow R_3 + R_1$:
+
+$$
+\begin{bmatrix}
+2 & 1 & -1 \\
+0 & \frac{1}{2} & \frac{1}{2} \\
+0 & 2 & 1
+\end{bmatrix}
+$$
+
+#### Step 2: Second column
+
+Eliminate below second pivot ($\frac{1}{2}$):
+
+$R_3 \leftarrow R_3 - 4R_2$:
+
+$$
+\begin{bmatrix}
+2 & 1 & -1 \\
+0 & \frac{1}{2} & \frac{1}{2} \\
+0 & 0 & -1
+\end{bmatrix}
+$$
+
+Once in upper triangular form, we can **calculate Determinant** by:
+
+$$\det(A) = \pm \prod_{i=1}^n a_{ii}$$
+(product of diagonal entries, with sign depending on number of row swaps)
+
+---
+
+## Inverse of a 2×2 Matrix
 
 Given the matrix
 
@@ -244,7 +364,52 @@ $$
 
 ## Adjugate and Cofactor Matrix
 
-The adjugate (classical adjoint) of $A$ is the transpose of its cofactor matrix.
+#### Minor Matrix
+
+For an $n \times n$ square matrix $A = (a_{ij})$, the **minor** $M_{ij}$ of entry $a_{ij}$ is the determinant of the $(n-1) \times (n-1)$ submatrix obtained by deleting the $i$-th row and $j$-th column of $A$.
+
+For $A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$
+
+The minor $M_{12}$ (delete row 1, column 2):
+$$M_{12} = \det\begin{bmatrix} 4 & 6 \\ 7 & 9 \end{bmatrix} = 36 - 42 = -6$$
+
+The **cofactor** of $a_{ij}$ is defined as:
+
+$$C_{ij} = (-1)^{i+j} M_{ij}$$
+
+The factor $(-1)^{i+j}$ creates a "checkerboard" pattern of signs:
+
+$$
+\begin{bmatrix}
++ & - & + & \cdots \\
+- & + & - & \cdots \\
++ & - & + & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+$$
+
+$$C_{12} = (-1)^{1+2} M_{12} = (-1)^3 \cdot (-6) = -1 \cdot (-6) = 6$$
+
+The **cofactor matrix** of $A$ is the matrix whose entries are the cofactors:
+
+$$
+\text{Cof}(A) = \begin{bmatrix}
+C_{11} & C_{12} & \cdots & C_{1n}\\
+C_{21} & C_{22} & \cdots & C_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+C_{n1} & C_{n2} & \cdots & C_{nn}
+\end{bmatrix}
+$$
+
+The **adjugate matrix** (or adjoint) is the transpose of the cofactor matrix:
+
+$$\text{adj}(A) = \text{Cof}(A)^T$$
+
+#### Inverse Formula
+
+When $A$ is invertible:
+
+$$A^{-1} = \frac{1}{\det(A)} \text{adj}(A)$$
 
 ### Cofactors of a 2×2 Matrix
 
@@ -733,7 +898,7 @@ This method leverages the structure of the RREF to systematically find the solut
     $$
     x_{i_p} + \sum_{q=1}^k C_{p,q}\,x_{j_q} = 0,\qquad p=1,\dots,r,
     $$
-    which defines the coefficient matrix $C \in \mathbb{R}^{r\times k}$ of the free variables in the pivot equations.    
+    which defines the coefficient matrix $C \in \mathbb{R}^{r\times k}$ of the free variables in the pivot equations.
 
 For an $m \times n$ matrix in RREF with $r$ pivot columns and $k = n - r$ free columns:
 
@@ -845,10 +1010,10 @@ The null space is:
 $$\ker(A) = \text{span} \left\{ \begin{bmatrix} -3 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}, \begin{bmatrix} -3 \\ 0 \\ -9 \\ 4 \\ 1 \end{bmatrix} \right\}$$
 
 ---
+
 ### The Minus-1 Trick for Homogeneous Systems
 
 The Minus-1 Trick is a practical method for reading out solutions $\mathbf{x}$ of a homogeneous system of linear equations $A\mathbf{x} = \mathbf{0}$, where $A \in \mathbb{R}^{k \times n}$, $\mathbf{x} \in \mathbb{R}^n$.
-
 
 We assume that $A$ is in reduced row-echelon form without any rows that contain only zeros
 
@@ -867,7 +1032,9 @@ We assume that $A$ is in reduced row-echelon form without any rows that contain 
 **The columns of $\tilde{A}$ that contain $-1$ as pivots are solutions of the homogeneous system $A\mathbf{x} = \mathbf{0}$.**
 
 ## Example
+
 Given
+
 $$
 A=\begin{bmatrix}
 1 & 3 & 0 & 0 & 3\\
@@ -878,7 +1045,6 @@ A=\begin{bmatrix}
 $$
 
 We now augment this matrix to a 5 × 5 matrix by adding rows of the form [ 0 · · · 0 −1 0 · · · 0 ] at the places where the pivots on the diagonal are missing and obtain
-
 
 $$
 \tilde A=
@@ -898,6 +1064,7 @@ For $\mathbf{x} \in \mathbb{R}^5$:
 $$\mathbf{x} = \lambda_1 \begin{bmatrix} 3 \\ -1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + \lambda_2 \begin{bmatrix} 3 \\ 0 \\ 9 \\ -4 \\ -1 \end{bmatrix}, \quad \lambda_1, \lambda_2 \in \mathbb{R}$$
 
 ---
+
 ### Comparison: Standard Method vs. Minus-1 Trick
 
 `Standard "Identity Block" Form`
@@ -911,8 +1078,9 @@ then the system $A\mathbf{x} = \mathbf{0}$ becomes:
 $$I_k \mathbf{x}_p + C\mathbf{x}_f = \mathbf{0} \quad \implies \quad \mathbf{x}_p = -C\mathbf{x}_f$$
 
 where:
-- $\mathbf{x}_p \in \mathbb{R}^k$ are the pivot variables
-- $\mathbf{x}_f \in \mathbb{R}^{n-k}$ are the free variables
+
+-   $\mathbf{x}_p \in \mathbb{R}^k$ are the pivot variables
+-   $\mathbf{x}_f \in \mathbb{R}^{n-k}$ are the free variables
 
 Thus the null space basis is packaged in the matrix:
 
@@ -933,6 +1101,7 @@ Since multiplying a basis vector by $-1$ does not change the span, both methods 
 $$\text{span}(N) = \text{span}(\tilde{N}) = \ker(A)$$
 
 ---
+
 ## Calculating the Inverse Using Gaussian Elimination
 
 To compute the inverse $A^{-1}$ of $A \in \mathbb{R}^{n \times n}$, we need to find a matrix $X$ that satisfies $AX = I_n$. Then, $X = A^{-1}$.
@@ -949,47 +1118,56 @@ If the left block cannot be reduced to $I_n$ (i.e., a zero row appears), then $A
 
 **Key insight**: Determining the inverse of a matrix is equivalent to solving systems of linear equations.
 
-#### Example 
+#### Example
 
 To determine the inverse of:
 
-$$A = \begin{bmatrix}
+$$
+A = \begin{bmatrix}
 1 & 0 & 2 & 0 \\
 1 & 1 & 0 & 0 \\
 1 & 2 & 0 & 1 \\
 1 & 1 & 1 & 1
-\end{bmatrix} $$
+\end{bmatrix}
+$$
 
 #### Step 1: Set up the augmented matrix
 
-$$\left[\begin{array}{cccc|cccc}
+$$
+\left[\begin{array}{cccc|cccc}
 1 & 0 & 2 & 0 & 1 & 0 & 0 & 0 \\
 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\
 1 & 2 & 0 & 1 & 0 & 0 & 1 & 0 \\
 1 & 1 & 1 & 1 & 0 & 0 & 0 & 1
-\end{array}\right]$$
+\end{array}\right]
+$$
 
 #### Step 2: Apply Gaussian elimination to reach RREF
 
-$$\left[\begin{array}{cccc|cccc}
+$$
+\left[\begin{array}{cccc|cccc}
 1 & 0 & 0 & 0 & -1 & 2 & -2 & 2 \\
 0 & 1 & 0 & 0 & 1 & -1 & 2 & -2 \\
 0 & 0 & 1 & 0 & 1 & -1 & 1 & -1 \\
 0 & 0 & 0 & 1 & -1 & 0 & -1 & 2
-\end{array}\right]$$
+\end{array}\right]
+$$
 
 #### Step 3: Read the inverse from the right-hand side
 
 The desired inverse is given as:
 
-$$A^{-1} = \begin{bmatrix}
+$$
+A^{-1} = \begin{bmatrix}
 -1 & 2 & -2 & 2 \\
 1 & -1 & 2 & -2 \\
 1 & -1 & 1 & -1 \\
 -1 & 0 & -1 & 2
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 ---
+
 ## Matrix Inverse and Solving Linear Systems
 
 For a matrix $A$, the inverse $A^{-1}$ is defined so that:
@@ -1010,20 +1188,20 @@ This is the clean formula solution for solving linear systems.
 
 If $A$ is **not invertible** (determinant = 0, or rows/columns are linearly dependent), then $A^{-1}$ does not exist. In that case:
 
-- The system may have **no solution** (inconsistent system), or
-- The system may have **infinitely many solutions** (dependent system)
+-   The system may have **no solution** (inconsistent system), or
+-   The system may have **infinitely many solutions** (dependent system)
 
 #### Non-Square Matrices
 
-If $A$ is **not square** ($m \times n$ with $m \neq n$),  Then the usual inverse does not make sense, because $I_m \neq I_n$.
+If $A$ is **not square** ($m \times n$ with $m \neq n$), Then the usual inverse does not make sense, because $I_m \neq I_n$.
 
 ### Generalized Inverses
 
-For non-square or singular matrices, mathematicians define *generalized inverses*.
+For non-square or singular matrices, mathematicians define _generalized inverses_.
 
 ### (a) Left Inverse
 
-If $A$ is **tall** ($m \geq n$) and has **full column rank** (rank = $n$), then:
+If $A$ is **tall** ($m \geq n$) and has **full column rank (The columns are linearly independent)** (rank = $n$), then:
 
 $$A^{\top}A \in \mathbb{R}^{n \times n}$$
 
@@ -1042,17 +1220,76 @@ So it behaves like an inverse **on the left**.
 **Requirement**: A left inverse $B$ of $A$ must satisfy $BA = I_n$.
 
 **Construction**:
+
 1. $A^{\top}A$ is always an $n \times n$ symmetric matrix
 2. If $A$ has full column rank, then $A^{\top}A$ is invertible
 3. Let's verify: $BA = (A^{\top}A)^{-1}A^{\top}A = (A^{\top}A)^{-1}(A^{\top}A) = I_n$ ✓
 
 **Intuition**:
-- The factor $A^{\top}$ projects things back into the column space of $A$
-- Multiplying by $(A^{\top}A)^{-1}$ rescales it correctly so the final effect is identity on $\mathbb{R}^n$
-- This construction comes directly from the **normal equations** in least squares:
-  $$A^{\top}A\mathbf{x} = A^{\top}\mathbf{b}$$
-  which are solved by:
-  $$\mathbf{x} = (A^{\top}A)^{-1}A^{\top}\mathbf{b}$$
+
+-   The factor $A^{\top}$ projects things back into the column space of $A$
+-   Multiplying by $(A^{\top}A)^{-1}$ rescales it correctly so the final effect is identity on $\mathbb{R}^n$
+-   This construction comes directly from the **normal equations** in least squares:
+    $$A^{\top}A\mathbf{x} = A^{\top}\mathbf{b}$$
+    which are solved by:
+    $$\mathbf{x} = (A^{\top}A)^{-1}A^{\top}\mathbf{b}$$
+
+### Number of Left Inverses for a Matrix
+
+A left inverse of $A\in\mathbb{R}^{m\times n}$ is a matrix $B\in\mathbb{R}^{n\times m}$ such that
+
+$$
+BA = I_n.
+$$
+
+The number of left inverses a matrix has depends entirely on its columns. For an $m \times n$ matrix $A$ where $m > n$, there are two possible scenarios:
+
+#### Case 1: Columns are Linearly Independent
+
+If the matrix has **full column rank** (all columns are linearly independent), then it has **infinitely many** left inverses.
+
+### The Pseudoinverse
+
+One of these is the most important and is called the **pseudoinverse**:
+
+$$A_{\text{left}}^{-1} = (A^T A)^{-1} A^T$$
+
+#### General Form
+
+You can create all other left inverses by adding any matrix $N$ that satisfies $NA = 0$:
+
+$$B = A_{\text{left}}^{-1} + N$$
+
+where $NA = 0$ and $B$ is still a left inverse.
+
+#### Example
+
+Consider this $2 \times 1$ matrix (its single column is inherently independent):
+
+$$A = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$$
+
+**One left inverse**: $B = \begin{bmatrix} 1 & 0 \end{bmatrix}$
+
+Check: $BA = \begin{bmatrix} 1 & 0 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = [1] = I_1$
+
+**Another left inverse**: $C = \begin{bmatrix} 1 & 5 \end{bmatrix}$
+
+Check: $CA = \begin{bmatrix} 1 & 5 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = [1] = I_1$
+
+You could replace 5 with any real number, giving infinitely many left inverses.
+
+#### Case 2: Columns are Linearly Dependent
+
+If the columns are **linearly dependent** (not full column rank), then **no left inverse exists**.
+
+$$
+\text{rank}(BA) \le \min\{\text{rank}(B), \text{rank}(A)\} \le \text{rank}(A) < n
+$$
+
+**Sylvester's rank inequality**: For compatible matrices,
+
+$$\text{rank}(A) + \text{rank}(B) - n \leq \text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}$$
+
 
 ### (b) Right Inverse
 
@@ -1064,11 +1301,11 @@ is invertible. We define the **right inverse**:
 
 $$A_R^{-1} = A^{\top}(AA^{\top})^{-1}$$
 
-- Check:
-  $$
-  A A_R^{-1} \;=\; A A^\top (A A^\top)^{-1} \;=\; I_m.
-  $$
-Thus $A_R^{-1}$ “undoes” multiplication by $A$ from the right.
+-   Check:
+    $$
+    A A_R^{-1} \;=\; A A^\top (A A^\top)^{-1} \;=\; I_m.
+    $$
+    Thus $A_R^{-1}$ “undoes” multiplication by $A$ from the right.
 
 ### (c) Moore-Penrose Pseudoinverse
 
@@ -1076,9 +1313,9 @@ Thus $A_R^{-1}$ “undoes” multiplication by $A$ from the right.
 
 Often in applications (statistics, machine learning, data fitting), $A$ is **tall** ($m > n$), meaning we have **more equations than unknowns**. In that case, the system is usually **inconsistent** — there is no exact $\mathbf{x}$ such that $A\mathbf{x} = \mathbf{b}$.
 
-Since we cannot solve $A\mathbf{x} = \mathbf{b}$ exactly, we instead look for an $\mathbf{x}$ that makes $A\mathbf{x}$ **as close as possible** to $\mathbf{b}$. 
+Since we cannot solve $A\mathbf{x} = \mathbf{b}$ exactly, we instead look for an $\mathbf{x}$ that makes $A\mathbf{x}$ **as close as possible** to $\mathbf{b}$.
 
-We cannot satisfy all equations, but we can find a vector $x $ that makes the residual 
+We cannot satisfy all equations, but we can find a vector $x $ that makes the residual
 
 $$
 r = b - Ax
@@ -1092,39 +1329,42 @@ $$
 x^\star = \arg \min_x \|Ax - b\|_2.
 $$
 
-
 Formally:
 
 $$\min_{\mathbf{x} \in \mathbb{R}^n} \|A\mathbf{x} - \mathbf{b}\|^2$$
 
 This is the **least squares problem**: we want the $\mathbf{x}$ that minimizes the squared error between $A\mathbf{x}$ and $\mathbf{b}$.
 
-#### Derivation (normal equations) : 
+#### Derivation (normal equations) :
 
 The error is:
 
 $$f(\mathbf{x}) = \|A\mathbf{x} - \mathbf{b}\|^2 = (A\mathbf{x} - \mathbf{b})^{\top}(A\mathbf{x} - \mathbf{b})$$
 
 Then
+
 $$
 \nabla f(x) = 2A^\top(Ax-b).
 $$
+
 Setting $\nabla f(x)=0$ gives the **normal equations**
+
 $$
 A^\top A\,x = A^\top b.
 $$
 
-
 ### Solution
 
-- If $A$ has full column rank ($\operatorname{rank}(A)=n$), then $A^\top A$ is invertible and the unique minimizer is
-  $$
-  x^\star = (A^\top A)^{-1}A^\top b.
-  $$
-  Equivalently, $x^\star = A^+ b$ (pseudoinverse).
+-   If $A$ has full column rank ($\operatorname{rank}(A)=n$), then $A^\top A$ is invertible and the unique minimizer is
 
-- This is called the least-squares solution because it minimizes the squared error between Ax and 𝑏
-- $A\mathbf{x}$ is the **projection of $\mathbf{b}$** onto the column space of $A$
+    $$
+    x^\star = (A^\top A)^{-1}A^\top b.
+    $$
+
+    Equivalently, $x^\star = A^+ b$ (pseudoinverse).
+
+-   This is called the least-squares solution because it minimizes the squared error between Ax and 𝑏
+-   $A\mathbf{x}$ is the **projection of $\mathbf{b}$** onto the column space of $A$
 
 ---
 
@@ -1149,21 +1389,22 @@ where $(A^+)$ denotes the **Moore-Penrose pseudoinverse** of \(A\).
 This is called the minimum-norm solution because it picks the shortest vector among the infinitely many possible solutions.
 
 ---
+
 ### Rank-deficient case
 
 For a matrix $A \in \mathbb{R}^{m \times n}$ the **rank** of (A) is defined as the maximum number of linearly independent columns (or rows) of (A).
 
-If  ${rank}(A) < \min(m, n)$ we say that \(A\) is **rank-deficient**.
+If ${rank}(A) < \min(m, n)$ we say that \(A\) is **rank-deficient**.
 
 Intuitively, this means that some columns (or rows) are linearly dependent on others. Consequently:
 
-- Some directions in the solution space are “free,” leading to **infinitely many solutions** in the underdetermined case.
-- Even in overdetermined least-squares problems, the minimizer may **not be unique**, because one can move along **null-space directions** without changing (Ax).
+-   Some directions in the solution space are “free,” leading to **infinitely many solutions** in the underdetermined case.
+-   Even in overdetermined least-squares problems, the minimizer may **not be unique**, because one can move along **null-space directions** without changing (Ax).
 
 The **pseudoinverse** $A^+$ defined via the singular value decomposition (SVD), always exists and provides:
 
-- **Overdetermined case:** Multiple least-squares minimizers exist. The pseudoinverse $(A^+)$ selects the one with **minimum norm**.  
-- **Underdetermined case:** Infinitely many solutions exist. The pseudoinverse $(A^+)$ selects the **minimum-norm solution**.
+-   **Overdetermined case:** Multiple least-squares minimizers exist. The pseudoinverse $(A^+)$ selects the one with **minimum norm**.
+-   **Underdetermined case:** Infinitely many solutions exist. The pseudoinverse $(A^+)$ selects the **minimum-norm solution**.
 
 In this case, the **Moore–Penrose pseudoinverse** $A^+$ picks out one special solution:
 
@@ -1175,33 +1416,33 @@ namely the one with **minimum Euclidean norm** among all least-squares solutions
 This is called the **minimum-norm least-squares solution**, because it not only minimizes $\|Ax - b\|_2$
 but also selects the solution with the **smallest Euclidean norm** among all possible least-squares solutions.
 
-
 ---
 
 The **Moore-Penrose pseudoinverse** $A^+$ is a generalization that:
 
-- Always exists, for any $A \in \mathbb{R}^{m \times n}$
-- No matter what shape or rank A has $𝐴^+$ is defined.
-- Reduces to the usual inverse if $A$ is square and invertible
+-   Always exists, for any $A \in \mathbb{R}^{m \times n}$
+-   No matter what shape or rank A has $𝐴^+$ is defined.
+-   Reduces to the usual inverse if $A$ is square and invertible
 
 **Formula** (when $A$ has full column rank):
-- Full column rank ($m\ge n$): 
-  $$
-  A^+ = (A^\top A)^{-1} A^\top \quad (\text{equals } A_L^{-1}).
-  $$
+
+-   Full column rank ($m\ge n$):
+    $$
+    A^+ = (A^\top A)^{-1} A^\top \quad (\text{equals } A_L^{-1}).
+    $$
 
 **Formula** (when $A$ has full row rank):
-- Full row rank ($m\le n$):
-  $$
-  A^+ = A^\top (A A^\top)^{-1} \quad (\text{equals } A_R^{-1}).
-  $$
+
+-   Full row rank ($m\le n$):
+    $$
+    A^+ = A^\top (A A^\top)^{-1} \quad (\text{equals } A_R^{-1}).
+    $$
 
 The pseudoinverse is particularly important in data science, statistics, and machine learning for **least squares regression**.
 
 For reasons of numerical precision it is generally not recommended to compute the inverse or pseudo-inverse.
 Forming $A^\top A$ requires a **matrix–matrix multiplication**, which is computationally expensive for large $A$.
 Furthermore, computing the inverse $(A^\top A)^{-1} $ adds additional cost.
-
 
 ### How is it Computed?
 
@@ -1218,54 +1459,61 @@ $$A^+ = V\Sigma^+ U^{\top}$$
 where $\Sigma^+$ is obtained by inverting each nonzero singular value and transposing the shape of $\Sigma$.
 
 This construction guarantees:
-- Always exists
-- Stable and numerically reliable
-- Encodes rank and null space information cleanly
 
-   
-``The pseudoinverse`` $A^+$ ``is a matrix you can always use in place of an inverse.``
+-   Always exists
+-   Stable and numerically reliable
+-   Encodes rank and null space information cleanly
+
+`The pseudoinverse` $A^+$ `is a matrix you can always use in place of an inverse.`
 
 ---
 
 Geometric view:
+
 $$
 Ax^\star = AA^+ b = \operatorname{proj}_{\operatorname{Col}(A)}(b),\qquad
 b - Ax^\star \perp \operatorname{Col}(A).
 $$
 
 Define the projectors
+
 $$
 P_{\operatorname{col}} := AA^+,\qquad P_{\operatorname{row}} := A^+A.
 $$
+
 Then $P_{\operatorname{col}}$ projects onto $\operatorname{Col}(A)$ and $P_{\operatorname{row}}$ projects onto $\operatorname{Row}(A)$, both orthogonally:
+
 $$
 P_{\operatorname{col}}^2=P_{\operatorname{col}}=(P_{\operatorname{col}})^\top,\quad
 P_{\operatorname{row}}^2=P_{\operatorname{row}}=(P_{\operatorname{row}})^\top.
 $$
+
 For $x^\star=A^+b$, the residual $r^\star=b-Ax^\star$ satisfies $A^\top r^\star=0$.
 
 ---
+
 Gaussian elimination is not only for solving $Ax = b$. The same algorithm underpins many core operations in linear algebra:
 
-- **Determinants:** You can compute $\det(A)$ by reducing $A$ to triangular form and multiplying the pivots.  
-- **Independence:** By row reducing a set of vectors, you can check if they are linearly independent.  
-- **Inverses:** By augmenting with $I$ and performing row reduction, one obtains $A^{-1}$.  
-- **Rank:** The number of pivots (nonzero rows in echelon form) gives $\text{rank}(A)$.  
-- **Bases:** From the reduced row echelon form (RREF), one can extract bases for the column space, row space, or null space.  
+-   **Determinants:** You can compute $\det(A)$ by reducing $A$ to triangular form and multiplying the pivots.
+-   **Independence:** By row reducing a set of vectors, you can check if they are linearly independent.
+-   **Inverses:** By augmenting with $I$ and performing row reduction, one obtains $A^{-1}$.
+-   **Rank:** The number of pivots (nonzero rows in echelon form) gives $\text{rank}(A)$.
+-   **Bases:** From the reduced row echelon form (RREF), one can extract bases for the column space, row space, or null space.
 
 ---
+
 Gaussian elimination has a computational cost of about:
 
 $$O(n^3)$$
 
 operations for an $n \times n$ system.
 
-* In the **first column**, you eliminate entries below the pivot. That means you update about $(n-1)$ rows, and each update touches about $(n-1)$ entries of that row.  
-  → Roughly $(n-1)\cdot (n-1) \approx n^2$ operations.
+-   In the **first column**, you eliminate entries below the pivot. That means you update about $(n-1)$ rows, and each update touches about $(n-1)$ entries of that row.  
+    → Roughly $(n-1)\cdot (n-1) \approx n^2$ operations.
 
-* In the **second column**, the active submatrix is now of size $(n-1) \times (n-1)$. Work there is about $(n-2)^2$.
+-   In the **second column**, the active submatrix is now of size $(n-1) \times (n-1)$. Work there is about $(n-2)^2$.
 
-* Next, $(n-3)^2$, and so on, until the last few pivots are trivial.
+-   Next, $(n-3)^2$, and so on, until the last few pivots are trivial.
 
 The total cost is:
 
@@ -1285,7 +1533,7 @@ $$
 \frac{1}{3}n^3.
 $$
 
-- For **millions of variables**: $O(n^3)$ becomes astronomically expensive in both time and memory
+-   For **millions of variables**: $O(n^3)$ becomes astronomically expensive in both time and memory
 
 ---
 
@@ -1299,28 +1547,27 @@ $$\mathbf{x}^{(k+1)} = C\mathbf{x}^{(k)} + \mathbf{d}$$
 
 where $C$ and $\mathbf{d}$ are chosen so that the approximation converges to the true solution $\mathbf{x}^*$.
 
-- At each step, the residual:
-  $$\mathbf{r}^{(k)} = \mathbf{b} - A\mathbf{x}^{(k)}$$
-  gets smaller
+-   At each step, the residual:
+    $$\mathbf{r}^{(k)} = \mathbf{b} - A\mathbf{x}^{(k)}$$
+    gets smaller
 
-- The error norm $\|\mathbf{x}^{(k)} - \mathbf{x}^*\|$ shrinks with iterations
+-   The error norm $\|\mathbf{x}^{(k)} - \mathbf{x}^*\|$ shrinks with iterations
 
 ### Examples of Iterative Methods
 
-- **Jacobi method**
-- **Gauss-Seidel method**
-- **Successive over-relaxation (SOR)**
-- **Conjugate gradient (CG)** and other **Krylov subspace methods**
+-   **Jacobi method**
+-   **Gauss-Seidel method**
+-   **Successive over-relaxation (SOR)**
+-   **Conjugate gradient (CG)** and other **Krylov subspace methods**
 
 These methods scale much better for large, sparse systems because:
 
-- They don't require full elimination
-- They exploit sparsity (lots of zeros in $A$)
-- Often, convergence is reached in far fewer than $O(n^3)$ steps
+-   They don't require full elimination
+-   They exploit sparsity (lots of zeros in $A$)
+-   Often, convergence is reached in far fewer than $O(n^3)$ steps
 
-      **Gaussian elimination** = exact, finite, but costly → good for moderate-size problems
+        **Gaussian elimination** = exact, finite, but costly → good for moderate-size problems
 
-      **Iterative methods** = approximate but scalable → essential for large systems in science/engineering (e.g., fluid dynamics, machine learning)
+        **Iterative methods** = approximate but scalable → essential for large systems in science/engineering (e.g., fluid dynamics, machine learning)
+
 ---
-
-
