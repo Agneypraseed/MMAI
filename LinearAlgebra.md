@@ -51,6 +51,8 @@ $$\boxed{\text{Signed Volume} = \det(A)}$$
 
 ### Row Operations and Determinants
 
+**Row operations preserve the linear dependency relationships between the columns.**
+
 ### 1. Row Swap
 
 **Swapping two rows** multiplies the determinant by $-1$.
@@ -1290,7 +1292,6 @@ $$
 
 $$\text{rank}(A) + \text{rank}(B) - n \leq \text{rank}(AB) \leq \min\{\text{rank}(A), \text{rank}(B)\}$$
 
-
 ### (b) Right Inverse
 
 If $A$ is **wide** ($m \leq n$) and has **full row rank** (rank = $m$), then:
@@ -1571,3 +1572,172 @@ These methods scale much better for large, sparse systems because:
         **Iterative methods** = approximate but scalable → essential for large systems in science/engineering (e.g., fluid dynamics, machine learning)
 
 ---
+
+# Eigenvectors and Eigenvalues
+
+A matrix $A$ represents a linear transformation. An **eigenvector** of a square matrix $A$ is a non-zero vector $\mathbf{v}$ that, when the matrix $A$ is multiplied by $\mathbf{v}$, the direction of $\mathbf{v}$ is unchanged.
+
+The result is simply the original vector $\mathbf{v}$ scaled by some number $\lambda$.
+
+This number $\lambda$ is the **eigenvalue** corresponding to the eigenvector $\mathbf{v}$.
+
+Eigenvalues are defined only for square matrices $ A \in F\_{n \times n} $
+
+### Mathematical Formulation
+
+The defining equation is:
+
+$$\boxed{A\mathbf{v} = \lambda\mathbf{v}}$$
+
+where:
+
+-   $A$ is an $n \times n$ square matrix
+-   $\mathbf{v} \neq \mathbf{0}$ is the eigenvector
+-   $\lambda$ is the eigenvalue (can be zero, negative, or complex)
+
+### Geometric Interpretation
+
+When a matrix transforms most vectors, it both **rotates** and **scales** them. But eigenvectors are special:
+
+-   They only get **scaled** (stretched or shrunk)
+-   Their **direction** remains the same (or flips if $\lambda < 0$)
+
+## Simple 2×2 Example
+
+Consider:
+$$A = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix}$$
+
+**Eigenvector 1**: $\mathbf{v}_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+
+Check: $A\mathbf{v}_1 = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 3 \\ 0 \end{bmatrix} = 3\begin{bmatrix} 1 \\ 0 \end{bmatrix}$
+
+So $\lambda_1 = 3$ ✓
+
+**Eigenvector 2**: $\mathbf{v}_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$
+
+Check: $A\mathbf{v}_2 = \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix} \begin{bmatrix} 1 \\ -1 \end{bmatrix} = \begin{bmatrix} 2 \\ -2 \end{bmatrix} = 2\begin{bmatrix} 1 \\ -1 \end{bmatrix}$
+
+So $\lambda_2 = 2$ ✓
+
+## Finding Eigenvalues and Eigenvectors
+
+### Step 1: Find Eigenvalues
+
+Rearrange $A\mathbf{v} = \lambda\mathbf{v}$ to:
+$$(A - \lambda I)\mathbf{v} = \mathbf{0}$$
+
+For non-zero $\mathbf{v}$ to exist, the matrix $(A - \lambda I)$ must be singular:
+
+$$\det(A - \lambda I) = 0$$
+
+This gives the **characteristic equation**.
+
+### Step 2: Find Eigenvectors
+
+For each eigenvalue $\lambda_i$, solve:
+$$(A - \lambda_i I)\mathbf{v} = \mathbf{0}$$
+
+The solutions (excluding $\mathbf{v} = \mathbf{0}$) are the eigenvectors.
+
+#### **Simplifying Computations**
+
+-   Powers of matrices: $$\boxed{A^k\mathbf{v} = \lambda^k\mathbf{v}}$$
+-   Matrix exponentials: $e^{At}\mathbf{v} = e^{\lambda t}\mathbf{v}$
+
+#### Proof (by induction on k)
+
+-   Base cases:
+    -   $k=0$: $A^0 v = I v = v = \lambda^0 v$.
+    -   $k=1$: $A^1 v = A v = \lambda v = \lambda^1 v$ (by definition).
+-   Inductive step:
+    Assume $A^k v = \lambda^k v$ for some $k\ge 1$. Then
+    $$
+    A^{k+1} v = A(A^k v) = A(\lambda^k v) = \lambda^k (A v) = \lambda^k(\lambda v) = \lambda^{k+1} v.
+    $$
+    Hence, by induction, $A^k v = \lambda^k v$ for all $k\in\mathbb{N}$.
+
+If $A$ is invertible, the identity extends to all integers $k\in\mathbb{Z}$:
+
+$$
+A^{-k} v = \lambda^{-k} v,
+$$
+
+since $A^{-1}v = \lambda^{-1} v$ and the same induction applies.
+
+#### Conceptual view
+
+An eigenvector $v$ specifies an invariant one-dimensional subspace (an “axis”) of the transformation $A$. Acting by $A$ on that axis is simply scaling by $\lambda$. Reapplying $A$ $k$ times composes the same scaling $k$ times, yielding $\lambda^k$ overall.
+
+When you multiply an eigenvector $\mathbf{v}$ by $A$:
+
+1. It stays perfectly on its axis (direction unchanged)
+2. It only gets scaled by factor $\lambda$
+
+So applying $A$ exactly $k$ times means:
+
+-   First application: Scale by $\lambda$
+-   Second application: Scale by $\lambda$ again
+-   Third application: Scale by $\lambda$ again
+-   ...
+-   $k$-th application: Scale by $\lambda$ again
+
+Total scaling = $\lambda \times \lambda \times \cdots \times \lambda$ ($k$ times) = $\lambda^k$
+
+-   Polynomial functional calculus: For any polynomial $p$,
+
+    $$
+    p(A)v = p(\lambda)\,v.
+    $$
+
+    ![alt text](/Images/image.png)
+
+-   Analytic functions (when defined via convergent power series): If $f(z)=\sum_{k\ge 0} a_k z^k$ converges at $\lambda$, then
+
+    $$
+    f(A)v = \sum_{k\ge 0} a_k A^k v = \sum_{k\ge 0} a_k \lambda^k v = f(\lambda)\,v.
+    $$
+
+    Examples: $e^{tA}v = e^{t\lambda} v$, $(A-\mu I)^{-1}v = (\lambda-\mu)^{-1} v$ (when $\lambda\ne \mu$).
+
+-   Instead of computing $A^{100}$ (which requires 99 matrix multiplications), if we know the eigendecomposition:
+    $$A^{100}\mathbf{x} = A^{100}(c_1\mathbf{v}_1 + \cdots + c_n\mathbf{v}_n) = c_1\lambda_1^{100}\mathbf{v}_1 + \cdots + c_n\lambda_n^{100}\mathbf{v}_n$$
+
+#### **Understanding System Behavior**
+
+-   **Stability**: If all $|\lambda_i| < 1$, repeated applications of $A$ shrink vectors
+-   **Growth**: If any $|\lambda_i| > 1$, the system exhibits growth
+-   **Oscillations**: Complex eigenvalues indicate rotational behavior
+
+#### **Applications**
+
+-   **Principal Component Analysis (PCA)**: Eigenvectors of covariance matrices
+-   **Google PageRank**: Dominant eigenvector of web link matrix
+-   **Quantum Mechanics**: Energy states are eigenvalues
+-   **Vibrations**: Natural frequencies are related to eigenvalues
+
+### Special Cases
+
+#### Symmetric Matrices
+
+For real symmetric matrices:
+
+-   All eigenvalues are real
+-   Eigenvectors are orthogonal
+
+#### Diagonal Matrices
+
+Eigenvalues are the diagonal entries, eigenvectors are standard basis vectors
+
+#### Identity Matrix
+
+Every non-zero vector is an eigenvector with eigenvalue 1
+
+### Key Properties
+
+1. **Trace**: $\text{tr}(A) = \sum \lambda_i$
+2. **Determinant**: $\det(A) = \prod \lambda_i$
+3. **Invertibility**: $A$ is invertible iff all $\lambda_i \neq 0$
+4. **Diagonalization**: If $A$ has $n$ independent eigenvectors, then $A = PDP^{-1}$ where $D$ is diagonal
+
+---
+
